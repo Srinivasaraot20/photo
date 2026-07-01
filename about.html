@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About Us | Moments Photography</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* Base Styles */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#c9a84c;
+  --gold-light:#d4aa60;
+  --gold-dark:#a8883a;
+  --black:#0a0a0a;
+  --dark:#111111;
+  --dark2:#1a1a1a;
+  --cream:#faf7f2;
+  --text:#333;
+  --grey:#888;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 50px;
+  background:transparent;
+  transition:0.3s;
+}
+nav.scrolled {
+  background: var(--dark);
+  padding: 12px 50px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-text{display:flex;flex-direction:column;line-height:1}
+.logo-script{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:28px;color:#fff;line-height:1.1}
+.logo-sub{font-size:9px;color:#ccc;letter-spacing:4px;text-transform:uppercase;margin-top:2px}
+.logo-cam{color:var(--gold);font-size:20px;margin-top:4px}
+.nav-links{display:flex;gap:32px}
+.nav-links a{font-size:13px;font-weight:500;color:#fff;letter-spacing:1.5px;text-transform:uppercase;opacity:.85;transition:.2s}
+.nav-links a:hover,.nav-links a.active{opacity:1;color:var(--gold)}
+.nav-links a.active{border-bottom:1px solid var(--gold);padding-bottom:2px}
+.btn-book{
+  background:transparent;color:var(--gold);
+  padding:11px 22px;border-radius:3px;
+  font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  border:1px solid var(--gold);cursor:pointer;display:flex;align-items:center;gap:6px;
+  transition:.2s;
+}
+.btn-book:hover{background:rgba(201,168,76,.1)}
+
+/* ABOUT HERO */
+.about-hero{
+  position:relative;height:90vh;min-height:700px;
+  display:flex;align-items:center;
+  background:linear-gradient(to right,rgba(0,0,0,0.85) 30%,rgba(0,0,0,0.2) 100%),
+  url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1600&q=80') center/cover no-repeat;
+  overflow:hidden;
+}
+.hero-content{padding-left:80px;padding-right:45%;position:relative;z-index:2;color:#fff}
+.hero-eyebrow{font-size:12px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;display:block;font-weight:600}
+.hero-content h1{font-family:'Playfair Display',serif;font-size:62px;font-weight:700;line-height:1.1;margin-bottom:20px}
+.hero-content h1 .gold{color:var(--gold)}
+.hero-divider{margin-bottom:24px;display:flex;align-items:center;color:var(--gold);font-size:16px;}
+.hero-divider::before, .hero-divider::after{content:'';display:block;width:40px;height:1px;background:var(--gold);opacity:0.6;}
+.hero-divider span{margin:0 12px;transform:rotate(90deg);display:inline-block;font-family:serif;}
+.hero-content p{color:rgba(255,255,255,.8);font-size:14px;line-height:1.8;margin-bottom:16px;max-width:450px}
+.signature-wrap{margin-top:30px}
+.signature{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:42px;color:#fff;line-height:1;margin-bottom:4px}
+.signature-title{font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase}
+
+/* OUR STORY */
+.story-sec{padding:90px 60px;background:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.story-images{position:relative;height:500px}
+.img-main{position:absolute;top:0;right:40px;width:60%;height:80%;object-fit:cover;border-radius:4px;box-shadow:0 10px 30px rgba(0,0,0,0.1);z-index:1}
+.img-secondary{position:absolute;bottom:0;left:20px;width:45%;height:55%;object-fit:cover;border-radius:4px;box-shadow:0 10px 30px rgba(0,0,0,0.1);border:6px solid var(--cream);z-index:2}
+.img-tertiary{position:absolute;bottom:-40px;right:0;width:50%;height:45%;object-fit:cover;border-radius:4px;box-shadow:0 10px 30px rgba(0,0,0,0.1);border:6px solid var(--cream);z-index:3}
+.exp-badge{position:absolute;bottom:-20px;left:0;background:var(--dark);color:#fff;padding:24px;border-radius:4px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.15);z-index:4;border:1px solid #333}
+.exp-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--gold);line-height:1;display:block;margin-bottom:8px}
+.exp-txt{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#aaa;line-height:1.4;display:block}
+
+.story-text{}
+.story-text .eyebrow{font-size:11px;color:var(--gold-dark);letter-spacing:2px;font-weight:600;text-transform:uppercase;margin-bottom:12px;display:block}
+.story-text h2{font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:var(--black);margin-bottom:16px;line-height:1.2}
+.story-text .story-divider{display:flex;align-items:center;color:var(--gold-light);margin-bottom:24px;font-size:16px;}
+.story-text .story-divider::before{content:'';display:block;width:40px;height:1px;background:var(--gold-light);opacity:0.6;}
+.story-text .story-divider span{margin:0 12px;transform:rotate(90deg);display:inline-block;font-family:serif;}
+.story-text p{font-size:13px;color:var(--text);line-height:1.8;margin-bottom:20px}
+.story-text .calligraphy{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:32px;color:var(--gold-dark);margin-top:30px}
+
+/* STATS */
+.stats{background:var(--dark);padding:28px 60px;display:flex;align-items:center;justify-content:space-around}
+.stat-item{text-align:center;padding:10px 20px;position:relative}
+.stat-item:not(:last-child)::after{content:'';position:absolute;right:0;top:10%;height:80%;width:1px;background:rgba(255,255,255,.12)}
+.stat-icon{color:var(--gold);font-size:22px;margin-bottom:6px;display:block}
+.stat-num{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:#fff;display:block;line-height:1}
+.stat-label{font-size:11px;color:#999;letter-spacing:1px;text-transform:uppercase;margin-top:4px;display:block}
+
+/* OUR TEAM */
+.team-sec{padding:90px 60px;background:#fff;text-align:center}
+.team-sec .eyebrow{font-size:11px;color:var(--gold-dark);letter-spacing:2px;font-weight:600;text-transform:uppercase;margin-bottom:12px;display:block}
+.team-sec h2{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--black);margin-bottom:16px}
+.team-sec .sec-divider{display:flex;justify-content:center;align-items:center;color:var(--gold-light);margin-bottom:50px;font-size:16px;}
+.team-sec .sec-divider::before, .team-sec .sec-divider::after{content:'';display:block;width:40px;height:1px;background:var(--gold-light);opacity:0.6;}
+.team-sec .sec-divider span{margin:0 12px;transform:rotate(90deg);display:inline-block;font-family:serif;}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.team-card{background:var(--dark);border-radius:4px;overflow:hidden;text-align:left}
+.team-img{height:280px;overflow:hidden}
+.team-img img{width:100%;height:100%;object-fit:cover;transition:.4s}
+.team-card:hover .team-img img{transform:scale(1.05)}
+.team-info{padding:20px}
+.team-name{font-size:15px;font-weight:600;color:#fff;margin-bottom:4px}
+.team-role{font-size:11px;color:#aaa;margin-bottom:14px}
+.team-social{display:flex;gap:10px}
+.team-social a{width:26px;height:26px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:10px;transition:.2s}
+.team-social a:hover{border-color:var(--gold);color:var(--gold)}
+
+/* EQUIPMENT */
+.equip-sec{background:var(--dark2);display:flex;align-items:center;min-height:450px}
+.equip-text{padding:80px 60px;flex:1;color:#fff}
+.equip-text .eyebrow{font-size:11px;color:var(--gold);letter-spacing:2px;font-weight:600;text-transform:uppercase;margin-bottom:12px;display:block}
+.equip-text h2{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:#fff;margin-bottom:16px;line-height:1.2;max-width:400px}
+.equip-text .eq-divider{display:flex;align-items:center;color:var(--gold);margin-bottom:24px;font-size:16px;}
+.equip-text .eq-divider::before{content:'';display:block;width:40px;height:1px;background:var(--gold);opacity:0.6;}
+.equip-text .eq-divider span{margin:0 12px;transform:rotate(90deg);display:inline-block;font-family:serif;}
+.equip-text p{font-size:13px;color:#aaa;line-height:1.8;margin-bottom:30px;max-width:350px}
+.equip-text .btn-outline-gold{background:transparent;color:#fff;border:1.5px solid var(--gold);padding:13px 26px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.2s}
+.equip-text .btn-outline-gold:hover{background:var(--gold)}
+.equip-img{flex:1.2;height:450px;background:url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&q=80') center/cover no-repeat}
+
+/* BTS */
+.bts-sec{padding:80px 60px;background:var(--cream);text-align:center}
+.bts-sec .eyebrow{font-size:11px;color:var(--gold-dark);letter-spacing:2px;font-weight:600;text-transform:uppercase;margin-bottom:12px;display:block}
+.bts-sec h2{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--black);margin-bottom:16px}
+.bts-sec .sec-divider{display:flex;justify-content:center;align-items:center;color:var(--gold-light);margin-bottom:50px;font-size:16px;}
+.bts-sec .sec-divider::before, .bts-sec .sec-divider::after{content:'';display:block;width:40px;height:1px;background:var(--gold-light);opacity:0.6;}
+.bts-sec .sec-divider span{margin:0 12px;transform:rotate(90deg);display:inline-block;font-family:serif;}
+.bts-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.bts-img{height:240px;overflow:hidden;border-radius:2px}
+.bts-img img{width:100%;height:100%;object-fit:cover;transition:.4s}
+.bts-img:hover img{transform:scale(1.05)}
+
+/* CTA */
+.cta-sec{background:var(--dark);padding:50px 60px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.07)}
+.cta-text h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#fff;margin-bottom:8px}
+.cta-text p{font-size:12px;color:#aaa}
+.cta-btns{display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+.cta-btns .btn-gold{background:var(--gold-light);color:#fff;border:none;padding:12px 24px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;cursor:pointer;border-radius:2px;display:inline-flex;align-items:center;gap:8px}
+.cta-btns .btn-chat{background:transparent;color:#fff;border:none;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.cta-btns .btn-chat .wa-icon{color:#25D366;font-size:18px}
+
+/* FOOTER */
+footer{background:var(--dark);padding:60px 60px 30px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1.2fr 1.2fr 1.4fr;gap:40px;margin-bottom:40px}
+.footer-brand .logo-script{font-size:26px}
+.footer-brand p{font-size:12px;color:#888;line-height:1.8;margin:14px 0 16px}
+.footer-social{display:flex;gap:10px}
+.footer-social a{width:30px;height:30px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#999;transition:.2s}
+.footer-social a:hover{border-color:var(--gold);color:var(--gold)}
+footer h4{font-size:13px;font-weight:700;color:#fff;letter-spacing:1px;text-transform:uppercase;margin-bottom:18px}
+footer ul{list-style:none}
+footer ul li{margin-bottom:10px}
+footer ul li a{font-size:12px;color:#888;transition:.2s}
+footer ul li a:hover{color:var(--gold)}
+.contact-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+.contact-item span.icon{color:var(--gold);flex-shrink:0;margin-top:1px}
+.contact-item span.txt{font-size:12px;color:#888;line-height:1.5}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:20px;display:flex;justify-content:space-between;align-items:center}
+.footer-bottom p{font-size:11px;color:#666}
+.footer-bottom-links{display:flex;gap:20px}
+.footer-bottom-links a{font-size:11px;color:#666;transition:.2s}
+.footer-bottom-links a:hover{color:var(--gold)}
+
+.wa-float{position:fixed;right:20px;bottom:24px;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;color:#fff;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;cursor:pointer;transition:.2s}
+.wa-float:hover{transform:scale(1.1)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-text">
+      <span class="logo-script">Moments <span class="logo-cam">📷</span></span>
+      <span class="logo-sub">Photography</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="moments-photography.html">Home</a>
+    <a href="about.html" class="active">About</a>
+    <a href="services.html">Services</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <a href="book.html" class="btn-book">BOOK A SESSION 📅</a>
+</nav>
+
+<!-- ABOUT HERO -->
+<section class="about-hero">
+  <div class="hero-content">
+    <span class="hero-eyebrow">ABOUT US</span>
+    <h1>We Capture<br><span class="gold">Real Moments &<br>True Emotions.</span></h1>
+    <span class="hero-divider"><span>❦</span></span>
+    <p>We are not just photographers; we are storytellers.<br>We believe in capturing the real emotions, beautiful moments and timeless memories that you will cherish forever.</p>
+    <div class="signature-wrap">
+      <div class="signature">Rahul Verma</div>
+      <div class="signature-title">FOUNDER & LEAD PHOTOGRAPHER</div>
+    </div>
+  </div>
+</section>
+
+<!-- OUR STORY -->
+<section class="story-sec">
+  <div class="story-images">
+    <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=600&q=80" alt="Photographer" class="img-main">
+    <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=400&q=80" alt="Couple" class="img-secondary">
+    <img src="images/pl.jpg" alt="Camera" class="img-tertiary">
+    <div class="exp-badge">
+      <span class="exp-num">10+</span>
+      <span class="exp-txt">YEARS OF<br>EXPERIENCE</span>
+    </div>
+  </div>
+  <div class="story-text">
+    <span class="eyebrow">OUR STORY</span>
+    <h2>Turning Moments<br>Into Memories</h2>
+    <span class="story-divider"><span>❦</span></span>
+    <p>Moments Photography was born out of a simple idea - to preserve the most precious moments of your life in the most beautiful way possible.</p>
+    <p>With over a decade of experience, we have the passion and creativity to capture your special moments with perfection and authenticity.</p>
+    <p>Whether it's your wedding, a pre-wedding shoot, a birthday celebration or any special occasion, we are here to make it unforgettable.</p>
+    <div class="calligraphy">Let's create memories together!</div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item">
+    <span class="stat-icon">👥</span>
+    <span class="stat-num">500+</span>
+    <span class="stat-label">Happy Clients</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-icon">📷</span>
+    <span class="stat-num">700+</span>
+    <span class="stat-label">Events Covered</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-icon">🏅</span>
+    <span class="stat-num">4+</span>
+    <span class="stat-label">Years of Experience</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-icon">📍</span>
+    <span class="stat-num">25+</span>
+    <span class="stat-label">Cities Covered</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-icon">❤️</span>
+    <span class="stat-num">50K+</span>
+    <span class="stat-label">Memories Captured</span>
+  </div>
+</div>
+
+<!-- OUR TEAM -->
+<section class="team-sec">
+  <span class="eyebrow">OUR TEAM</span>
+  <h2>The People Behind The Lens</h2>
+  <span class="sec-divider"><span>❦</span></span>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-img"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" alt="Rahul Verma"></div>
+      <div class="team-info">
+        <div class="team-name">Rahul Verma</div>
+        <div class="team-role">Lead Photographer</div>
+        <div class="team-social"><a href="#">f</a><a href="#">📷</a><a href="#">▶</a></div>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-img"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80" alt="Priya Sharma"></div>
+      <div class="team-info">
+        <div class="team-name">Priya Sharma</div>
+        <div class="team-role">Creative Photographer</div>
+        <div class="team-social"><a href="#">f</a><a href="#">📷</a><a href="#">▶</a></div>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-img"><img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=400&q=80" alt="Arjun Mehta"></div>
+      <div class="team-info">
+        <div class="team-name">Arjun Mehta</div>
+        <div class="team-role">Cinematographer</div>
+        <div class="team-social"><a href="#">f</a><a href="#">📷</a><a href="#">▶</a></div>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-img"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80" alt="Karan Singh"></div>
+      <div class="team-info">
+        <div class="team-name">Karan Singh</div>
+        <div class="team-role">Drone Specialist</div>
+        <div class="team-social"><a href="#">f</a><a href="#">📷</a><a href="#">▶</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPMENT -->
+<section class="equip-sec">
+  <div class="equip-text">
+    <span class="eyebrow">EQUIPMENT WE USE</span>
+    <h2>The Best Gear For<br>The Best Results</h2>
+    <span class="eq-divider"><span>❦</span></span>
+    <p>We use top-of-the-line cameras, lenses and lighting equipment to ensure every shot we take is nothing short of perfection.</p>
+    <button class="btn-outline-gold">VIEW OUR GEAR ➔</button>
+  </div>
+  <div class="equip-img"></div>
+</section>
+
+<!-- BEHIND THE SCENES -->
+<section class="bts-sec">
+  <span class="eyebrow">BEHIND THE SCENES</span>
+  <h2>Where The Magic Happens</h2>
+  <span class="sec-divider"><span>❦</span></span>
+  <div class="bts-grid">
+    <div class="bts-img"><img src="images/s.webp" alt="BTS 1"></div>
+    <div class="bts-img"><img src="images/ss.jpg" alt="BTS 2"></div>
+    <div class="bts-img"><img src="images/yy.jpg" alt="BTS 3"></div>
+    <div class="bts-img"><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400&q=80" alt="BTS 4"></div>
+    <div class="bts-img"><img src="images/h.webp" alt="BTS 5"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="cta-text">
+    <h2>Let's Create Something Beautiful Together</h2>
+    <p>We would love to hear about your story and capture it in the most magical way.</p>
+  </div>
+  <div class="cta-btns">
+    <button class="btn-gold">BOOK YOUR SESSION 📅</button>
+    <button class="btn-chat"><span class="wa-icon">💬</span> CHAT WITH US</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">
+        <div class="logo-text">
+          <span class="logo-script" style="color:#fff">Moments 📷</span>
+          <span class="logo-sub" style="color:#888">Photography</span>
+        </div>
+      </div>
+      <p>Capturing real emotions and timeless memories that you will cherish forever.</p>
+      <div class="footer-social">
+        <a href="#">f</a>
+        <a href="#">📷</a>
+        <a href="#">▶</a>
+        <a href="#">𝑃</a>
+      </div>
+    </div>
+    <div>
+      <h4>QUICK LINKS</h4>
+      <ul>
+        <li><a href="moments-photography.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>SERVICES</h4>
+      <ul>
+        <li><a href="#">Wedding Photography</a></li>
+        <li><a href="#">Pre Wedding Shoots</a></li>
+        <li><a href="#">Birthday Photography</a></li>
+        <li><a href="#">Maternity Shoots</a></li>
+        <li><a href="#">Cinematic Films</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>CONTACT INFO</h4>
+      <div class="contact-item">
+        <span class="icon">📞</span>
+        <span class="txt">+91 98765 43210</span>
+      </div>
+      <div class="contact-item">
+        <span class="icon">✉️</span>
+        <span class="txt">hello@moments.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="icon">📍</span>
+        <span class="txt">123, Photography Street,<br>Your City, India – 500001</span>
+      </div>
+    </div>
+    <div>
+      <h4>FOLLOW US</h4>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px">
+        <img src="https://images.unsplash.com/photo-1519741347686-c1e331c20fef?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1476234251651-f353703a034d?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Moments Photography. All Rights Reserved.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<div class="wa-float">💬</div>
+
+<script>
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  if (window.scrollY > 50) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+</script>
+
+</body>
+</html>

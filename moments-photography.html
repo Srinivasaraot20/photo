@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Moments Photography</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#c9a84c;
+  --gold-light:#d4aa60;
+  --gold-dark:#a8883a;
+  --black:#0a0a0a;
+  --dark:#111111;
+  --dark2:#1a1a1a;
+  --cream:#faf7f2;
+  --text:#333;
+  --grey:#888;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 50px;
+  background:transparent;
+  transition:0.3s;
+}
+nav.scrolled {
+  background: var(--dark);
+  padding: 12px 50px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-text{display:flex;flex-direction:column;line-height:1}
+.logo-script{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:28px;color:#fff;line-height:1.1}
+.logo-sub{font-size:9px;color:#ccc;letter-spacing:4px;text-transform:uppercase;margin-top:2px}
+.logo-cam{color:var(--gold);font-size:20px;margin-top:4px}
+.nav-links{display:flex;gap:32px}
+.nav-links a{font-size:13px;font-weight:500;color:#fff;letter-spacing:1.5px;text-transform:uppercase;opacity:.85;transition:.2s}
+.nav-links a:hover,.nav-links a.active{opacity:1;color:var(--gold)}
+.nav-links a.active{border-bottom:1px solid var(--gold);padding-bottom:2px}
+.btn-book{
+  background:var(--gold);color:#fff;
+  padding:11px 22px;border-radius:3px;
+  font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  border:none;cursor:pointer;display:flex;align-items:center;gap:6px;
+  transition:.2s;
+}
+.btn-book:hover{background:var(--gold-dark)}
+
+/* ── HERO ── */
+.hero{
+  position:relative;height:100vh;min-height:620px;
+  display:flex;align-items:center;
+  background:linear-gradient(to right,rgba(0,0,0,.7) 30%,rgba(0,0,0,.2) 100%),
+  url('https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=1600&q=80') center/cover no-repeat;
+  overflow:hidden;
+}
+.hero-content{padding-left:80px;padding-right:40%;position:relative;z-index:2}
+.hero-tag{font-size:11px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;display:block}
+.hero h1{font-family:'Playfair Display',serif;color:#fff;line-height:1.1;margin-bottom:20px}
+.hero h1 .line1{font-size:28px;font-style:italic;display:block;font-weight:400;opacity:.9}
+.hero h1 .line2{font-size:62px;font-weight:700;display:block}
+.hero h1 .line3{font-size:62px;font-weight:700;display:block;color:var(--gold)}
+.hero p{color:rgba(255,255,255,.75);font-size:14px;line-height:1.8;margin-bottom:30px;max-width:400px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-gold{background:transparent;color:#fff;border:1.5px solid var(--gold);padding:13px 26px;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;transition:.2s}
+.btn-gold:hover{background:var(--gold)}
+.btn-outline-white{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5);padding:13px 26px;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;transition:.2s}
+.btn-outline-white:hover{border-color:#fff}
+.hero-social{position:absolute;right:26px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px;z-index:2}
+.hero-social a{width:34px;height:34px;border:1px solid rgba(255,255,255,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;transition:.2s}
+.hero-social a:hover{border-color:var(--gold);color:var(--gold)}
+.hero-dots{position:absolute;bottom:28px;left:80px;display:flex;gap:8px}
+.hero-dot{width:30px;height:3px;background:rgba(255,255,255,.3);border-radius:2px;cursor:pointer}
+.hero-dot.active{background:var(--gold);width:44px}
+
+/* ── STATS ── */
+.stats{background:var(--dark);padding:28px 60px;display:flex;align-items:center;justify-content:space-around}
+.stat-item{text-align:center;padding:10px 20px;position:relative}
+.stat-item:not(:last-child)::after{content:'';position:absolute;right:0;top:10%;height:80%;width:1px;background:rgba(255,255,255,.12)}
+.stat-icon{color:var(--gold);font-size:22px;margin-bottom:6px;display:block}
+.stat-num{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:#fff;display:block;line-height:1}
+.stat-label{font-size:11px;color:#999;letter-spacing:1px;text-transform:uppercase;margin-top:4px;display:block}
+
+/* ── SECTION HEADER ── */
+.sec-eyebrow{display:block;text-align:center;font-size:11px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
+.sec-title{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;text-align:center;color:var(--black);margin-bottom:10px}
+.sec-divider{display:flex;justify-content:center;margin-bottom:40px}
+.sec-divider::before{content:'✦';color:var(--gold);font-size:14px}
+
+/* ── SERVICES ── */
+.services{padding:70px 60px;background:#fff}
+.services-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-bottom:36px}
+.svc-card{border:1px solid #e8e0d0;border-radius:4px;padding:28px 16px;text-align:center;transition:.25s;cursor:pointer}
+.svc-card:hover{border-color:var(--gold);box-shadow:0 4px 20px rgba(201,168,76,.12);transform:translateY(-3px)}
+.svc-icon{font-size:30px;color:var(--gold);margin-bottom:14px;display:block}
+.svc-card h3{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);margin-bottom:8px;line-height:1.4}
+.svc-card p{font-size:11px;color:var(--grey);line-height:1.6}
+.view-all-wrap{text-align:center}
+.btn-dark{background:var(--dark);color:#fff;padding:14px 36px;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;border:none;cursor:pointer;transition:.2s}
+.btn-dark:hover{background:var(--gold)}
+
+/* ── GALLERY ── */
+.gallery{padding:70px 60px;background:var(--dark)}
+.gallery .sec-eyebrow{color:var(--gold)}
+.gallery .sec-title{color:#fff}
+.gallery-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;grid-template-rows:220px 220px;gap:10px;margin-bottom:30px}
+.gal-img{overflow:hidden;position:relative}
+.gal-img img{width:100%;height:100%;object-fit:cover;transition:.4s}
+.gal-img:hover img{transform:scale(1.06)}
+.gal-img.tall{grid-row:span 2}
+.gal-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent);opacity:0;transition:.3s}
+.gal-img:hover .gal-overlay{opacity:1}
+.gallery-btn-wrap{text-align:center}
+.btn-outline-gold{background:transparent;color:#fff;border:1.5px solid var(--gold);padding:14px 36px;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.2s}
+.btn-outline-gold:hover{background:var(--gold)}
+
+/* ── WHY + PROCESS ── */
+/* ── WHY + PROCESS ── */
+.why-process{padding:70px 60px;background:var(--cream);display:grid;grid-template-columns:1.2fr 300px 1.8fr;gap:40px;align-items:center}
+.why-block{}
+.why-eyebrow{font-size:11px;color:var(--gold-dark);letter-spacing:1.5px;font-weight:600;text-transform:uppercase;margin-bottom:8px;display:block}
+.why-block h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--black);margin-bottom:12px;line-height:1.2}
+.why-divider{display:flex;align-items:center;color:var(--gold-light);margin-bottom:28px;font-size:16px;}
+.why-divider::before, .why-divider::after{content:'';display:block;width:40px;height:1px;background:var(--gold-light);opacity:0.6;}
+.why-divider span{margin:0 12px;transform:rotate(90deg);display:inline-block;font-family:serif;}
+.why-feats-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px 16px}
+.why-feat{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;color:var(--dark2)}
+.why-feat-icon{width:36px;height:36px;border:1px solid var(--gold-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold-dark);font-size:16px;flex-shrink:0}
+.center-img{border-radius:16px;overflow:hidden;height:420px}
+.center-img img{width:100%;height:100%;object-fit:cover}
+.process-block{}
+.proc-eyebrow{font-size:11px;color:var(--gold-dark);letter-spacing:1.5px;font-weight:600;text-transform:uppercase;margin-bottom:8px;display:block}
+.process-block h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--black);margin-bottom:12px;line-height:1.2}
+.proc-divider{display:flex;align-items:center;color:var(--gold-light);margin-bottom:40px;font-size:16px;}
+.proc-divider::before, .proc-divider::after{content:'';display:block;width:40px;height:1px;background:var(--gold-light);opacity:0.6;}
+.proc-divider span{margin:0 12px;transform:rotate(90deg);display:inline-block;font-family:serif;}
+.proc-steps{display:flex;justify-content:space-between;position:relative;}
+.proc-steps::before{content:'';position:absolute;top:32px;left:32px;right:32px;height:1px;border-top:1.5px dashed var(--gold-dark);z-index:0;opacity:0.5}
+.proc-step{flex:1;text-align:center;position:relative;z-index:1}
+.proc-circle-wrap{width:64px;height:64px;border:1px solid rgba(168,136,58,0.4);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;background:var(--cream);position:relative}
+.proc-circle{width:48px;height:48px;border-radius:50%;background:var(--gold-dark);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--cream)}
+.proc-step h4{font-size:12px;font-weight:600;color:var(--dark2)}
+.proc-step .pnum{position:absolute;top:-24px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--grey);font-weight:500}
+
+/* ── TESTIMONIALS ── */
+.testimonials{padding:70px 0;background:var(--dark);position:relative;overflow:hidden}
+.testi-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1519741347686-c1e331c20fef?w=1400&q=60') center/cover no-repeat;opacity:.08}
+.testi-inner{position:relative;z-index:1;padding:0 60px}
+.testi-eyebrow{display:block;text-align:center;font-size:11px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
+.testi-title{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;text-align:center;color:#fff;margin-bottom:40px}
+.testi-wrap{display:grid;grid-template-columns:1fr 1fr 1fr 300px;gap:20px;align-items:start}
+.testi-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:24px;backdrop-filter:blur(4px)}
+.testi-avatar{width:56px;height:56px;border-radius:50%;border:2px solid var(--gold);overflow:hidden;margin:0 auto 10px}
+.testi-avatar img{width:100%;height:100%;object-fit:cover}
+.testi-stars{color:var(--gold);text-align:center;font-size:14px;margin-bottom:12px}
+.testi-text{font-size:12px;color:rgba(255,255,255,.75);line-height:1.8;text-align:center;margin-bottom:14px;font-style:italic}
+.testi-name{font-size:13px;font-weight:700;color:#fff;text-align:center}
+.testi-role{font-size:11px;color:var(--gold);text-align:center;letter-spacing:.5px}
+.testi-cta{background:linear-gradient(135deg,rgba(201,168,76,.2),rgba(201,168,76,.05));border:1px solid var(--gold);border-radius:4px;padding:36px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:250px}
+.testi-cta p{font-family:'Playfair Display',serif;font-size:22px;color:#fff;line-height:1.4;margin-bottom:24px;font-style:italic}
+.testi-dots{display:flex;justify-content:center;gap:8px;margin-top:30px}
+.testi-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer}
+.testi-dot.active{background:var(--gold)}
+.testi-arrow{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border:1px solid rgba(255,255,255,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer;z-index:2}
+.testi-arrow.left{left:14px}
+.testi-arrow.right{right:14px}
+.testi-arrow:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.07);padding:60px 60px 30px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1.2fr 1.2fr 1.4fr;gap:40px;margin-bottom:40px}
+.footer-brand .logo-script{font-size:26px}
+.footer-brand p{font-size:12px;color:#888;line-height:1.8;margin:14px 0 16px}
+.footer-social{display:flex;gap:10px}
+.footer-social a{width:30px;height:30px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#999;transition:.2s}
+.footer-social a:hover{border-color:var(--gold);color:var(--gold)}
+footer h4{font-size:13px;font-weight:700;color:#fff;letter-spacing:1px;text-transform:uppercase;margin-bottom:18px}
+footer ul{list-style:none}
+footer ul li{margin-bottom:10px}
+footer ul li a{font-size:12px;color:#888;transition:.2s}
+footer ul li a:hover{color:var(--gold)}
+.contact-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+.contact-item span.icon{color:var(--gold);flex-shrink:0;margin-top:1px}
+.contact-item span.txt{font-size:12px;color:#888;line-height:1.5}
+.newsletter-form{display:flex;margin-top:14px;border:1px solid rgba(255,255,255,.15);border-radius:3px;overflow:hidden}
+.newsletter-form input{background:transparent;border:none;outline:none;padding:10px 12px;color:#fff;font-size:12px;flex:1;font-family:'Jost',sans-serif}
+.newsletter-form input::placeholder{color:#666}
+.newsletter-form button{background:var(--gold);border:none;padding:10px 14px;color:#fff;cursor:pointer;font-size:14px}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:20px;display:flex;justify-content:space-between;align-items:center}
+.footer-bottom p{font-size:11px;color:#666}
+.footer-bottom-links{display:flex;gap:20px}
+.footer-bottom-links a{font-size:11px;color:#666;transition:.2s}
+.footer-bottom-links a:hover{color:var(--gold)}
+
+/* ── WHATSAPP FLOAT ── */
+.wa-float{position:fixed;right:20px;bottom:24px;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;color:#fff;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;cursor:pointer;transition:.2s}
+.wa-float:hover{transform:scale(1.1)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse {0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
+.animate-fade {opacity:0;animation-fill-mode:forwards}
+.animate-fade.show {animation:fadeUp .7s cubic-bezier(.2,.9,.2,1)}
+.hero-content.show h1 .line2,.hero-content.show h1 .line3{animation:fadeUp .9s cubic-bezier(.2,.9,.2,1) .15s both}
+.hero-content.show p{animation:fadeUp .9s cubic-bezier(.2,.9,.2,1) .3s both}
+.hero-social a{transition:transform .35s,opacity .35s}
+.hero-social a.show{transform:translateY(0);opacity:1}
+.gal-img{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+.gal-img.in-view{opacity:1;transform:translateY(0)}
+.gal-img img{transition:transform .6s ease,filter .6s}
+.gal-img:hover img{transform:scale(1.08);filter:brightness(.98)}
+.hero-dots .hero-dot{animation:pulse 2.4s ease-in-out infinite;opacity:.85}
+.hero-dots .hero-dot:not(.active){animation-delay:.2s;opacity:.45}
+
+/* Gallery pending placeholder */
+.gal-img.pending::after{content:'Image Pending';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.25));font-size:14px;z-index:2}
+.gal-img.pending img{filter:grayscale(.4) blur(.4px);opacity:.9}
+
+@media(max-width:900px){
+  nav{padding:14px 20px}
+  .nav-links{display:none}
+  .hero-content{padding-left:24px;padding-right:20px}
+  .hero h1 .line2,.hero h1 .line3{font-size:38px}
+  .stats{flex-wrap:wrap;gap:10px;padding:24px 20px}
+  .services,.gallery,.why-process,.testi-inner{padding:50px 20px}
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .gal-img.tall{grid-row:span 1}
+  .why-process{grid-template-columns:1fr;padding:50px 20px}
+  .center-img{display:none}
+  .testi-wrap{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr;padding:0}
+  footer{padding:40px 20px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-text">
+      <span class="logo-script">Moments <span class="logo-cam">📷</span></span>
+      <span class="logo-sub">Photography</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="moments-photography.html" class="active">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <a href="book.html" class="btn-book">📅 Book a Session</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-tag">Moments Photography</span>
+    <h1>
+      <span class="line1">We Don't Just Click</span>
+      <span class="line2">We Capture</span>
+      <span class="line3">Emotions</span>
+    </h1>
+    <p>Preserving your most precious moments<br>with creativity, passion and perfection.</p>
+    <div class="hero-btns">
+      <button class="btn-gold">📅 Book a Session</button>
+      <button class="btn-outline-white">🖼 View Gallery</button>
+    </div>
+  </div>
+  <div class="hero-social">
+    <a href="#">📷</a>
+    <a href="#">f</a>
+    <a href="#">▶</a>
+    <a href="#">𝑃</a>
+  </div>
+  <div class="hero-dots">
+    <div class="hero-dot active"></div>
+    <div class="hero-dot"></div>
+    <div class="hero-dot"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item">
+    <span class="stat-icon">👥</span>
+    <span class="stat-num">500+</span>
+    <span class="stat-label">Happy Clients</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-icon">📷</span>
+    <span class="stat-num">700+</span>
+    <span class="stat-label">Events Covered</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-icon">🏅</span>
+    <span class="stat-num">8+</span>
+    <span class="stat-label">Years of Experience</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-icon">📍</span>
+    <span class="stat-num">25+</span>
+    <span class="stat-label">Cities Captured</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-icon">❤️</span>
+    <span class="stat-num">50K+</span>
+    <span class="stat-label">Memories Captured</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services">
+  <span class="sec-eyebrow">Our Services</span>
+  <h2 class="sec-title">What We Do</h2>
+  <div class="sec-divider"></div>
+  <div class="services-grid">
+    <div class="svc-card">
+      <span class="svc-icon">💍</span>
+      <h3>Wedding Photography</h3>
+      <p>Timeless moments of your big day</p>
+    </div>
+    <div class="svc-card">
+      <span class="svc-icon">👫</span>
+      <h3>Pre Wedding Shoots</h3>
+      <p>Beautiful stories before the big day</p>
+    </div>
+    <div class="svc-card">
+      <span class="svc-icon">💎</span>
+      <h3>Engagement Photography</h3>
+      <p>Celebrate your special bond</p>
+    </div>
+    <div class="svc-card">
+      <span class="svc-icon">🎂</span>
+      <h3>Birthday Photography</h3>
+      <p>Candid moments to cherish forever</p>
+    </div>
+    <div class="svc-card">
+      <span class="svc-icon">🍼</span>
+      <h3>Baby & Maternity Shoots</h3>
+      <p>Precious milestones beautifully captured</p>
+    </div>
+    <div class="svc-card">
+      <span class="svc-icon">🎬</span>
+      <h3>Cinematic Films & Videography</h3>
+      <p>Relive your moments in cinematic style</p>
+    </div>
+  </div>
+  <div class="view-all-wrap">
+    <button class="btn-dark">View All Services</button>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+  <span class="sec-eyebrow">Featured Work</span>
+  <h2 class="sec-title" style="color:#fff;margin-bottom:10px">Stories We've Told</h2>
+  <div class="sec-divider" style="margin-bottom:30px"></div>
+  <div class="gallery-grid">
+    <div class="gal-img tall">
+      <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=600&q=80" alt="Stories We've Told" loading="lazy"/>
+      <div class="gal-overlay"></div>
+    </div>
+    <div class="gal-img">
+      <img src="images/coo.jpg" alt="Hands"/>
+      <div class="gal-overlay"></div>
+    </div>
+    <div class="gal-img tall" style="grid-row:span 2">
+      <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=600&q=80" alt="Bride"/>
+      <div class="gal-overlay"></div>
+    </div>
+    <div class="gal-img">
+      <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=600&q=80" alt="Couple"/>
+      <div class="gal-overlay"></div>
+    </div>
+    <div class="gal-img">
+      <img src="images/c.png" alt="Mountain"/>
+      <div class="gal-overlay"></div>
+    </div>
+    <div class="gal-img">
+      <img src="images/f.jpg" alt="Detail"/>
+      <div class="gal-overlay"></div>
+    </div>
+    <div class="gal-img">
+      <img src="https://images.unsplash.com/photo-1476234251651-f353703a034d?w=600&q=80" alt="Baby"/>
+      <div class="gal-overlay"></div>
+    </div>
+    <div class="gal-img">
+      <img src="images/m.jpg" alt="Couple Sunset"/>
+      <div class="gal-overlay"></div>
+    </div>
+    <div class="gal-img">
+      <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?w=600&q=80" alt="Portrait"/>
+      <div class="gal-overlay"></div>
+    </div>
+    <div class="gal-img">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" alt="Bride Detail"/>
+      <div class="gal-overlay"></div>
+    </div>
+  </div>
+  <div class="gallery-btn-wrap">
+    <button class="btn-outline-gold">Explore Full Gallery →</button>
+  </div>
+</section>
+
+<!-- WHY US + PROCESS -->
+<section class="why-process">
+  <div class="why-block">
+    <span class="why-eyebrow">Why Choose Us</span>
+    <h2>Creating Memories<br>That Last Forever</h2>
+    <span class="why-divider"><span>❦</span></span>
+    <div class="why-feats-grid">
+      <div class="why-feat"><div class="why-feat-icon">🎙</div><span>Creative Storytelling</span></div>
+      <div class="why-feat"><div class="why-feat-icon">🏅</div><span>Experienced Team</span></div>
+      <div class="why-feat"><div class="why-feat-icon">📸</div><span>Premium Equipment</span></div>
+      <div class="why-feat"><div class="why-feat-icon">⚡</div><span>Fast Delivery</span></div>
+      <div class="why-feat"><div class="why-feat-icon">✏️</div><span>Professional Editing</span></div>
+      <div class="why-feat"><div class="why-feat-icon">🤝</div><span>Personalized Service</span></div>
+    </div>
+  </div>
+
+  <div class="center-img">
+    <img src="images/middle-person.png" alt="Photographer"/>
+  </div>
+
+  <div class="process-block">
+    <span class="proc-eyebrow">Our Process</span>
+    <h2>From Moment to<br>Memory</h2>
+    <span class="proc-divider"><span>❦</span></span>
+    <div class="proc-steps">
+      <div class="proc-step">
+        <div class="proc-circle-wrap">
+          <span class="pnum">01</span>
+          <div class="proc-circle">📞</div>
+        </div>
+        <h4>Consultation</h4>
+      </div>
+      <div class="proc-step">
+        <div class="proc-circle-wrap">
+          <span class="pnum">02</span>
+          <div class="proc-circle">📋</div>
+        </div>
+        <h4>Planning</h4>
+      </div>
+      <div class="proc-step">
+        <div class="proc-circle-wrap">
+          <span class="pnum">03</span>
+          <div class="proc-circle">📷</div>
+        </div>
+        <h4>Event Day</h4>
+      </div>
+      <div class="proc-step">
+        <div class="proc-circle-wrap">
+          <span class="pnum">04</span>
+          <div class="proc-circle">🖼</div>
+        </div>
+        <h4>Editing</h4>
+      </div>
+      <div class="proc-step">
+        <div class="proc-circle-wrap">
+          <span class="pnum">05</span>
+          <div class="proc-circle">📦</div>
+        </div>
+        <h4>Delivery</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testi-bg"></div>
+  <div class="testi-arrow left">‹</div>
+  <div class="testi-inner">
+    <span class="testi-eyebrow">Client Love</span>
+    <h2 class="testi-title">What Our Clients Say</h2>
+    <div class="testi-wrap">
+      <div class="testi-card">
+        <div class="testi-avatar">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Neha"/>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">They captured every moment beautifully. We couldn't have asked for a better team!</p>
+        <div class="testi-name">Neha & Arjun</div>
+        <div class="testi-role">Wedding</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-avatar">
+          <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Ritika"/>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">The photos are magical! Every picture tells a story. Highly professional and very creative.</p>
+        <div class="testi-name">Ritika Sharma</div>
+        <div class="testi-role">Pre-Wedding Shoot</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-avatar">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Karan"/>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Amazing team! They made my birthday so special with their candid photography.</p>
+        <div class="testi-name">Karan Mehta</div>
+        <div class="testi-role">Birthday Shoot</div>
+      </div>
+      <div class="testi-cta">
+        <p>"Let us capture your story beautifully."</p>
+        <button class="btn-book">📅 Book a Session</button>
+      </div>
+    </div>
+    <div class="testi-dots">
+      <div class="testi-dot active"></div>
+      <div class="testi-dot"></div>
+      <div class="testi-dot"></div>
+    </div>
+  </div>
+  <div class="testi-arrow right">›</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">
+        <div class="logo-text">
+          <span class="logo-script" style="color:#fff">Moments 📷</span>
+          <span class="logo-sub" style="color:#888">Photography</span>
+        </div>
+      </div>
+      <p>We capture the moments you never want to forget. Let's create memories together.</p>
+      <div class="footer-social">
+        <a href="#">📷</a>
+        <a href="#">f</a>
+        <a href="#">▶</a>
+        <a href="#">𝑃</a>
+      </div>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="moments-photography.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Wedding Photography</a></li>
+        <li><a href="#">Pre Wedding Shoots</a></li>
+        <li><a href="#">Birthday Photography</a></li>
+        <li><a href="#">Maternity Shoots</a></li>
+        <li><a href="#">Cinematic Films</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact Info</h4>
+      <div class="contact-item">
+        <span class="icon">📞</span>
+        <span class="txt">+91 98765 43210</span>
+      </div>
+      <div class="contact-item">
+        <span class="icon">✉️</span>
+        <span class="txt">hello@moments.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="icon">📍</span>
+        <span class="txt">123, Photography Street,<br>Your City, India – 500001</span>
+      </div>
+    </div>
+    <div>
+      <h4>Newsletter</h4>
+      <p style="font-size:12px;color:#888;line-height:1.6;margin-bottom:14px">Subscribe to get updates on our latest offers & work.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Enter your email"/>
+        <button>→</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Moments Photography. All Rights Reserved.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<div class="wa-float">💬</div>
+<script>
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  if (window.scrollY > 50) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+
+  // Hero entrance
+  window.addEventListener('load', function(){
+    const hero = document.querySelector('.hero-content');
+    if(hero) hero.classList.add('show');
+    // reveal social icons staggered
+    const socials = document.querySelectorAll('.hero-social a');
+    socials.forEach((el,i)=> setTimeout(()=> el.classList.add('show'), 220 + i*90));
+  });
+
+  // Gallery reveal on scroll
+  (function(){
+    const imgs = document.querySelectorAll('.gal-img');
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver((entries,observer)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        })
+      },{threshold:0.15});
+      imgs.forEach(i=> io.observe(i));
+    } else {
+      imgs.forEach(i=> i.classList.add('in-view'));
+    }
+  })();
+
+  // Gallery image fallback: show placeholder and pending overlay on error
+  (function(){
+    const imgs = document.querySelectorAll('.gallery-grid img');
+    const fallback = 'https://via.placeholder.com/800x600?text=Image+Pending';
+    imgs.forEach(img=>{
+      img.addEventListener('error', function(){
+        if(!img.dataset.fallback){
+          img.dataset.fallback = '1';
+          img.src = fallback;
+          const p = img.closest('.gal-img'); if(p) p.classList.add('pending');
+        }
+      });
+      img.addEventListener('load', function(){
+        const p = img.closest('.gal-img'); if(p) p.classList.remove('pending');
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

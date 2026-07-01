@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gallery | Moments Photography</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* Base Styles */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#c9a84c;
+  --gold-light:#d4aa60;
+  --gold-dark:#a8883a;
+  --black:#0a0a0a;
+  --dark:#111111;
+  --dark2:#1a1a1a;
+  --cream:#faf7f2;
+  --text:#333;
+  --grey:#888;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;color:var(--text);background:var(--dark);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 50px;
+  background:transparent;
+  transition:0.3s;
+}
+nav.scrolled {
+  background: var(--dark);
+  padding: 12px 50px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-text{display:flex;flex-direction:column;line-height:1}
+.logo-script{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:28px;color:#fff;line-height:1.1}
+.logo-sub{font-size:9px;color:#ccc;letter-spacing:4px;text-transform:uppercase;margin-top:2px}
+.logo-cam{color:var(--gold);font-size:20px;margin-top:4px}
+.nav-links{display:flex;gap:32px}
+.nav-links a{font-size:13px;font-weight:500;color:#fff;letter-spacing:1.5px;text-transform:uppercase;opacity:.85;transition:.2s}
+.nav-links a:hover,.nav-links a.active{opacity:1;color:var(--gold)}
+.nav-links a.active{border-bottom:1px solid var(--gold);padding-bottom:2px}
+.btn-book{
+  background:transparent;color:var(--gold);
+  padding:11px 22px;border-radius:3px;
+  font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  border:1px solid var(--gold);cursor:pointer;display:flex;align-items:center;gap:6px;
+  transition:.2s;
+}
+.btn-book:hover{background:rgba(201,168,76,.1)}
+
+/* GALLERY HERO */
+.gal-hero{
+  position:relative;height:70vh;min-height:550px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(to right,rgba(10,10,10,0.95) 15%,rgba(10,10,10,0.2) 100%),
+  url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1600&q=80') center/cover no-repeat;
+  overflow:hidden;
+}
+.gal-hero-content{padding-left:80px;position:relative;z-index:2;color:#fff}
+.gal-hero-eyebrow{font-size:11px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;display:block;font-weight:600}
+.gal-hero-content h1{font-family:'Playfair Display',serif;font-size:56px;font-weight:700;line-height:1.1;margin-bottom:24px}
+.gal-hero-content h1 .gold{color:var(--gold-light)}
+.gal-hero-divider{display:flex;align-items:center;color:var(--gold);font-size:14px;margin-bottom:20px}
+.gal-hero-divider::before{content:'';display:block;width:30px;height:1px;background:var(--gold);opacity:0.6;}
+.gal-hero-divider span{margin:0 10px;transform:rotate(90deg);display:inline-block;font-family:serif;}
+.gal-hero-content p{color:#ccc;font-size:14px;line-height:1.8;max-width:400px}
+
+/* HERO SOCIAL ICONS */
+.hero-socials{
+  display:flex;flex-direction:column;gap:12px;
+  padding-right:50px;position:relative;z-index:2;
+}
+.hero-socials a{
+  width:36px;height:36px;border:1px solid rgba(255,255,255,.2);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:14px;transition:.2s;background:rgba(0,0,0,.3);
+}
+.hero-socials a:hover{background:var(--gold);border-color:var(--gold)}
+
+/* FILTER BAR */
+.filter-bar{
+  background:var(--dark2);padding:20px 50px;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.05);
+}
+.filter-btn{
+  background:transparent;color:#ccc;border:1px solid rgba(255,255,255,.15);
+  padding:10px 20px;border-radius:30px;font-size:11px;letter-spacing:1px;
+  text-transform:uppercase;font-weight:500;cursor:pointer;
+  display:flex;align-items:center;gap:8px;transition:.2s;
+}
+.filter-btn:hover{border-color:var(--gold);color:var(--gold)}
+.filter-btn.active{background:var(--gold-light);color:#fff;border-color:var(--gold-light)}
+
+/* GALLERY GRID */
+.gallery-wrapper{padding:50px;background:var(--black)}
+.gal-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-auto-rows:280px;
+  gap:10px;
+}
+.gal-item{
+  position:relative;border-radius:2px;overflow:hidden;
+  background:#1a1a1a;
+}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.gal-item:hover img{transform:scale(1.05)}
+.span-col-2{grid-column:span 2}
+.span-row-2{grid-row:span 2}
+
+/* Play Button Overlay */
+.play-overlay{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:48px;height:48px;background:rgba(0,0,0,0.5);
+  border:1px solid #fff;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:18px;cursor:pointer;transition:.2s;z-index:2;
+}
+.play-overlay:hover{background:var(--gold);border-color:var(--gold)}
+
+/* LOAD MORE */
+.load-more-wrap{text-align:center;padding:10px 0 60px}
+.btn-load{
+  background:transparent;color:#ccc;border:1px solid rgba(255,255,255,.2);
+  padding:12px 32px;font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  font-weight:600;cursor:pointer;border-radius:2px;display:inline-flex;align-items:center;gap:8px;transition:.2s;
+}
+.btn-load:hover{background:rgba(255,255,255,.05);color:#fff;border-color:#fff}
+
+/* CTA */
+.cta-sec{background:var(--dark2);padding:50px 60px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.07)}
+.cta-text-icon{display:flex;align-items:center;gap:20px}
+.cta-icon{font-size:42px;color:var(--gold)}
+.cta-text h2{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#fff;margin-bottom:6px}
+.cta-text p{font-size:12px;color:#aaa}
+.cta-btns{display:flex;gap:12px;align-items:center}
+.btn-gold{background:var(--gold-light);color:#fff;border:none;padding:12px 24px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;cursor:pointer;border-radius:2px;display:inline-flex;align-items:center;gap:8px;transition:.2s}
+.btn-gold:hover{background:var(--gold)}
+.btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3);padding:12px 24px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;cursor:pointer;border-radius:2px;display:inline-flex;align-items:center;gap:8px;transition:.2s}
+.btn-outline:hover{border-color:#fff}
+
+/* FOOTER */
+footer{background:var(--dark);padding:60px 60px 30px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1.2fr 1.2fr 1.4fr;gap:40px;margin-bottom:40px}
+.footer-brand .logo-script{font-size:26px}
+.footer-brand p{font-size:12px;color:#888;line-height:1.8;margin:14px 0 16px}
+.footer-social{display:flex;gap:10px}
+.footer-social a{width:30px;height:30px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#999;transition:.2s}
+.footer-social a:hover{border-color:var(--gold);color:var(--gold)}
+footer h4{font-size:13px;font-weight:700;color:#fff;letter-spacing:1px;text-transform:uppercase;margin-bottom:18px}
+footer ul{list-style:none}
+footer ul li{margin-bottom:10px}
+footer ul li a{font-size:12px;color:#888;transition:.2s}
+footer ul li a:hover{color:var(--gold)}
+.contact-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+.contact-item span.icon{color:var(--gold);flex-shrink:0;margin-top:1px}
+.contact-item span.txt{font-size:12px;color:#888;line-height:1.5}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:20px;display:flex;justify-content:space-between;align-items:center}
+.footer-bottom p{font-size:11px;color:#666}
+.footer-bottom-links{display:flex;gap:20px}
+.footer-bottom-links a{font-size:11px;color:#666;transition:.2s}
+.footer-bottom-links a:hover{color:var(--gold)}
+.wa-float{position:fixed;right:20px;bottom:24px;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;color:#fff;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;cursor:pointer;transition:.2s}
+.wa-float:hover{transform:scale(1.1)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-text">
+      <span class="logo-script">Moments <span class="logo-cam">📷</span></span>
+      <span class="logo-sub">Photography</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="moments-photography.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="gallery.html" class="active">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <a href="book.html" class="btn-book">BOOK A SESSION 📅</a>
+</nav>
+
+<!-- GALLERY HERO -->
+<section class="gal-hero">
+  <div class="gal-hero-content">
+    <span class="gal-hero-eyebrow">OUR GALLERY</span>
+    <h1>Captured Moments,<br><span class="gold">Timeless Stories.</span></h1>
+    <span class="gal-hero-divider"><span>❦</span></span>
+    <p>A collection of real moments, real emotions,<br>and beautiful memories we've had the honor to capture.</p>
+  </div>
+  <div class="hero-socials">
+    <a href="#">📷</a>
+    <a href="#">f</a>
+    <a href="#">▶</a>
+    <a href="#">𝑃</a>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <button class="filter-btn active">All</button>
+  <button class="filter-btn"><span>💍</span> Weddings</button>
+  <button class="filter-btn"><span>♡</span> Pre Weddings</button>
+  <button class="filter-btn"><span>💎</span> Engagement</button>
+  <button class="filter-btn"><span>🎂</span> Birthdays</button>
+  <button class="filter-btn"><span>👶</span> Baby Shoots</button>
+  <button class="filter-btn"><span>🤰</span> Maternity</button>
+  <button class="filter-btn"><span>💼</span> Corporate</button>
+  <button class="filter-btn"><span>🚁</span> Drone Shots</button>
+</div>
+
+<!-- GALLERY GRID -->
+<section class="gallery-wrapper">
+  <div class="gal-grid">
+    
+    <!-- Row 1/2 span -->
+    <div class="gal-item span-row-2">
+      <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=600&q=80" alt="Wedding Portrait">
+      <div class="play-overlay">▶</div>
+    </div>
+    
+    <div class="gal-item span-col-2">
+      <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80" alt="Wedding Palace">
+    </div>
+    
+    <div class="gal-item span-row-2">
+      <img src="https://images.unsplash.com/photo-1587271407850-8d438ca9fdf4?w=600&q=80" alt="Pre Wedding">
+      <div class="play-overlay">▶</div>
+    </div>
+    
+    <!-- Remaining col 4 of row 1 -->
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=400&q=80" alt="Baby">
+    </div>
+
+    <!-- Remaining row 2 -->
+    <div class="gal-item span-col-2">
+      <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=800&q=80" alt="Drone Shot">
+      <div class="play-overlay">▶</div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=400&q=80" alt="Maternity">
+    </div>
+
+    <!-- Row 3 -->
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&q=80" alt="Couple">
+    </div>
+    <div class="gal-item span-col-2">
+      <img src="https://images.unsplash.com/photo-1522853205096-3c224eb6964b?w=800&q=80" alt="Engagement Sunset">
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=400&q=80" alt="Hands">
+    </div>
+
+    <!-- Row 4 -->
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&q=80" alt="Corporate">
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1581404169974-bcdd7811f971?w=400&q=80" alt="Sunset Pre Wedding">
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1579168711413-eb1e27a69622?w=400&q=80" alt="Drone Close">
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1555529733-0e67056058be?w=400&q=80" alt="Birthday">
+    </div>
+
+  </div>
+</section>
+
+<!-- LOAD MORE -->
+<div class="gallery-wrapper" style="padding-top:0;">
+  <div class="load-more-wrap">
+    <button class="btn-load">LOAD MORE PHOTOS ↻</button>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="cta-text-icon">
+    <div class="cta-icon">📅</div>
+    <div class="cta-text">
+      <h2>Ready to create your own beautiful memories?</h2>
+      <p>Let's capture your special moments with passion and perfection.</p>
+    </div>
+  </div>
+  <div class="cta-btns">
+    <button class="btn-gold">BOOK A SESSION 📅</button>
+    <button class="btn-outline">CONTACT US ➔</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">
+        <div class="logo-text">
+          <span class="logo-script" style="color:#fff">Moments 📷</span>
+          <span class="logo-sub" style="color:#888">Photography</span>
+        </div>
+      </div>
+      <p>Capturing real emotions and timeless memories that you will cherish forever.</p>
+      <div class="footer-social">
+        <a href="#">f</a>
+        <a href="#">📷</a>
+        <a href="#">▶</a>
+        <a href="#">𝑃</a>
+      </div>
+    </div>
+    <div>
+      <h4>QUICK LINKS</h4>
+      <ul>
+        <li><a href="moments-photography.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>SERVICES</h4>
+      <ul>
+        <li><a href="#">Wedding Photography</a></li>
+        <li><a href="#">Pre Wedding Shoots</a></li>
+        <li><a href="#">Birthday Photography</a></li>
+        <li><a href="#">Maternity Shoots</a></li>
+        <li><a href="#">Cinematic Films</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>CONTACT INFO</h4>
+      <div class="contact-item">
+        <span class="icon">📞</span>
+        <span class="txt">+91 98765 43210</span>
+      </div>
+      <div class="contact-item">
+        <span class="icon">✉️</span>
+        <span class="txt">hello@moments.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="icon">📍</span>
+        <span class="txt">123, Photography Street,<br>Your City, India – 500001</span>
+      </div>
+    </div>
+    <div>
+      <h4>FOLLOW US</h4>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px">
+        <img src="https://images.unsplash.com/photo-1519741347686-c1e331c20fef?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1476234251651-f353703a034d?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Moments Photography. All Rights Reserved.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<div class="wa-float">💬</div>
+
+<script>
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  if (window.scrollY > 50) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+</script>
+
+</body>
+</html>

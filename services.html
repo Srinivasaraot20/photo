@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Services | Moments Photography</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* Base Styles */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#c9a84c;
+  --gold-light:#d4aa60;
+  --gold-dark:#a8883a;
+  --black:#0a0a0a;
+  --dark:#111111;
+  --dark2:#1a1a1a;
+  --cream:#faf7f2;
+  --cream2:#f4f1ec;
+  --text:#333;
+  --grey:#888;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 50px;
+  background:transparent;
+  transition:0.3s;
+}
+nav.scrolled {
+  background: var(--dark);
+  padding: 12px 50px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-text{display:flex;flex-direction:column;line-height:1}
+.logo-script{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:28px;color:#fff;line-height:1.1}
+.logo-sub{font-size:9px;color:#ccc;letter-spacing:4px;text-transform:uppercase;margin-top:2px}
+.logo-cam{color:var(--gold);font-size:20px;margin-top:4px}
+.nav-links{display:flex;gap:32px}
+.nav-links a{font-size:13px;font-weight:500;color:#fff;letter-spacing:1.5px;text-transform:uppercase;opacity:.85;transition:.2s}
+.nav-links a:hover,.nav-links a.active{opacity:1;color:var(--gold)}
+.nav-links a.active{border-bottom:1px solid var(--gold);padding-bottom:2px}
+.btn-book{
+  background:transparent;color:var(--gold);
+  padding:11px 22px;border-radius:3px;
+  font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  border:1px solid var(--gold);cursor:pointer;display:flex;align-items:center;gap:6px;
+  transition:.2s;
+}
+.btn-book:hover{background:rgba(201,168,76,.1)}
+
+/* SERVICES HERO */
+.srv-hero{
+  position:relative;height:75vh;min-height:550px;
+  display:flex;align-items:center;
+  background:linear-gradient(to right,rgba(0,0,0,0.9) 20%,rgba(0,0,0,0.3) 100%),
+  url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1600&q=80') center/cover no-repeat;
+  overflow:hidden;
+}
+.srv-hero-content{padding-left:80px;position:relative;z-index:2;color:#fff}
+.srv-hero-eyebrow{font-size:11px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;display:block;font-weight:600}
+.srv-hero-content h1{font-family:'Playfair Display',serif;font-size:54px;font-weight:700;line-height:1.1;margin-bottom:24px}
+.srv-hero-content h1 .gold{color:var(--gold-light)}
+.srv-hero-divider{display:flex;align-items:center;color:var(--gold);font-size:14px;margin-bottom:20px}
+.srv-hero-divider::before{content:'';display:block;width:30px;height:1px;background:var(--gold);opacity:0.6;}
+.srv-hero-divider span{margin:0 10px;transform:rotate(90deg);display:inline-block;font-family:serif;}
+.srv-hero-content p{color:#ccc;font-size:14px;line-height:1.8;max-width:400px}
+
+/* SECTION HEADER (Shared) */
+.sec-head{text-align:center;margin-bottom:50px}
+.sec-head .eyebrow{font-size:11px;color:var(--gold-dark);letter-spacing:2px;font-weight:600;text-transform:uppercase;margin-bottom:10px;display:block}
+.sec-head h2{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--black);margin-bottom:12px}
+.sec-head .sec-divider{display:flex;justify-content:center;align-items:center;color:var(--gold-light);font-size:16px;}
+.sec-head .sec-divider::before, .sec-head .sec-divider::after{content:'';display:block;width:30px;height:1px;background:var(--gold-light);opacity:0.5;}
+.sec-head .sec-divider span{margin:0 10px;transform:rotate(90deg);display:inline-block;font-family:serif;}
+
+/* SERVICES GRID */
+.srv-section{padding:80px 40px;background:#fff}
+.srv-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+.srv-card{background:#fff;border-radius:4px;text-align:center;transition:.3s;display:flex;flex-direction:column}
+.srv-card:hover{box-shadow:0 10px 30px rgba(0,0,0,0.08);transform:translateY(-5px)}
+.srv-img-wrap{position:relative;height:180px;border-radius:4px;overflow:hidden;margin-bottom:25px}
+.srv-img-wrap img{width:100%;height:100%;object-fit:cover;transition:.4s}
+.srv-card:hover .srv-img-wrap img{transform:scale(1.05)}
+.srv-icon{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);width:36px;height:36px;background:var(--dark);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:16px;border:2px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,0.1)}
+.srv-info{padding:0 15px 25px;display:flex;flex-direction:column;flex:1}
+.srv-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--black);margin-bottom:10px;line-height:1.2}
+.srv-desc{font-size:11px;color:#777;line-height:1.6;margin-bottom:20px;flex:1}
+.srv-link{font-size:10px;color:var(--gold-dark);letter-spacing:1px;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:4px;transition:.2s}
+.srv-link:hover{color:var(--black)}
+
+/* BENEFITS BAR */
+.benefits-bar{background:var(--cream2);padding:30px 40px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(0,0,0,0.05);border-bottom:1px solid rgba(0,0,0,0.05)}
+.bnft-item{display:flex;align-items:center;gap:12px}
+.bnft-icon{color:var(--gold-dark);font-size:24px}
+.bnft-text{display:flex;flex-direction:column}
+.bnft-title{font-size:12px;font-weight:700;color:var(--black)}
+.bnft-sub{font-size:10px;color:#777;margin-top:2px}
+
+/* OUR PROCESS */
+.process-sec{padding:90px 60px;background:#fff}
+.timeline{display:flex;justify-content:space-between;position:relative;margin-top:60px;padding:0 20px}
+.timeline::before{content:'';position:absolute;top:30px;left:50px;right:50px;height:1px;background:repeating-linear-gradient(to right,var(--gold-light) 0,var(--gold-light) 4px,transparent 4px,transparent 8px);z-index:1;opacity:0.5}
+.tm-step{position:relative;z-index:2;text-align:center;width:160px;display:flex;flex-direction:column;align-items:center}
+.tm-num{font-size:10px;color:var(--gold-dark);font-weight:700;margin-bottom:12px}
+.tm-circle{width:60px;height:60px;background:var(--dark);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:20px;margin-bottom:20px;border:4px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,0.05)}
+.tm-title{font-size:14px;font-weight:700;color:var(--black);margin-bottom:8px}
+.tm-desc{font-size:11px;color:#777;line-height:1.6}
+
+/* CTA */
+.cta-sec{background:linear-gradient(rgba(17,17,17,0.95),rgba(17,17,17,0.95)),url('https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=1200&q=80') center/cover;padding:60px;display:flex;justify-content:space-between;align-items:center}
+.cta-text h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#fff;margin-bottom:8px}
+.cta-text p{font-size:13px;color:#aaa}
+.cta-btns{display:flex;gap:16px;align-items:center}
+.btn-gold-solid{background:var(--gold-light);color:#fff;border:none;padding:14px 28px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;cursor:pointer;border-radius:2px;display:inline-flex;align-items:center;gap:8px;transition:.2s}
+.btn-gold-solid:hover{background:var(--gold)}
+.btn-outline-white{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3);padding:14px 28px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;cursor:pointer;border-radius:2px;display:inline-flex;align-items:center;gap:8px;transition:.2s}
+.btn-outline-white:hover{border-color:#fff}
+
+/* FOOTER */
+footer{background:var(--dark);padding:60px 60px 30px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1.2fr 1.2fr 1.4fr;gap:40px;margin-bottom:40px}
+.footer-brand .logo-script{font-size:26px}
+.footer-brand p{font-size:12px;color:#888;line-height:1.8;margin:14px 0 16px}
+.footer-social{display:flex;gap:10px}
+.footer-social a{width:30px;height:30px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#999;transition:.2s}
+.footer-social a:hover{border-color:var(--gold);color:var(--gold)}
+footer h4{font-size:13px;font-weight:700;color:#fff;letter-spacing:1px;text-transform:uppercase;margin-bottom:18px}
+footer ul{list-style:none}
+footer ul li{margin-bottom:10px}
+footer ul li a{font-size:12px;color:#888;transition:.2s}
+footer ul li a:hover{color:var(--gold)}
+.contact-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+.contact-item span.icon{color:var(--gold);flex-shrink:0;margin-top:1px}
+.contact-item span.txt{font-size:12px;color:#888;line-height:1.5}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:20px;display:flex;justify-content:space-between;align-items:center}
+.footer-bottom p{font-size:11px;color:#666}
+.footer-bottom-links{display:flex;gap:20px}
+.footer-bottom-links a{font-size:11px;color:#666;transition:.2s}
+.footer-bottom-links a:hover{color:var(--gold)}
+.wa-float{position:fixed;right:20px;bottom:24px;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;color:#fff;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;cursor:pointer;transition:.2s}
+.wa-float:hover{transform:scale(1.1)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-text">
+      <span class="logo-script">Moments <span class="logo-cam">📷</span></span>
+      <span class="logo-sub">Photography</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="moments-photography.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html" class="active">Services</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <a href="book.html" class="btn-book">BOOK A SESSION 📅</a>
+</nav>
+
+<!-- SERVICES HERO -->
+<section class="srv-hero">
+  <div class="srv-hero-content">
+    <span class="srv-hero-eyebrow">OUR SERVICES</span>
+    <h1>Every Moment,<br><span class="gold">Beautifully Captured</span></h1>
+    <span class="srv-hero-divider"><span>❦</span></span>
+    <p>From your biggest celebrations to the smallest moments, we are here to capture it all with creativity and passion.</p>
+  </div>
+</section>
+
+<!-- SERVICES GRID SECTION -->
+<section class="srv-section">
+  <div class="sec-head">
+    <span class="eyebrow">WHAT WE OFFER</span>
+    <h2>Our Photography Services</h2>
+    <span class="sec-divider"><span>❦</span></span>
+  </div>
+
+  <div class="srv-grid">
+    <!-- Card 1 -->
+    <div class="srv-card">
+      <div class="srv-img-wrap">
+        <img src="images/ww.jpg" alt="Wedding Photography">
+        <div class="srv-icon">💍</div>
+      </div>
+      <div class="srv-info">
+        <div class="srv-title">Wedding<br>Photography</div>
+        <p class="srv-desc">Capturing every emotion, ritual and moment from your special day.</p>
+        <a href="#" class="srv-link">VIEW DETAILS ➔</a>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="srv-card">
+      <div class="srv-img-wrap">
+        <img src="https://images.unsplash.com/photo-1518105779142-d971f228f8f8?w=400&q=80" alt="Pre Wedding Shoots">
+        <div class="srv-icon">♡</div>
+      </div>
+      <div class="srv-info">
+        <div class="srv-title">Pre Wedding<br>Shoots</div>
+        <p class="srv-desc">Beautiful stories before the big day, filled with love and chemistry.</p>
+        <a href="#" class="srv-link">VIEW DETAILS ➔</a>
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="srv-card">
+      <div class="srv-img-wrap">
+        <img src="https://images.unsplash.com/photo-1522853205096-3c224eb6964b?w=400&q=80" alt="Engagement Photography">
+        <div class="srv-icon">💎</div>
+      </div>
+      <div class="srv-info">
+        <div class="srv-title">Engagement<br>Photography</div>
+        <p class="srv-desc">Celebrate your new journey with elegant engagement sessions.</p>
+        <a href="#" class="srv-link">VIEW DETAILS ➔</a>
+      </div>
+    </div>
+    <!-- Card 4 -->
+    <div class="srv-card">
+      <div class="srv-img-wrap">
+        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&q=80" alt="Birthday Photography">
+        <div class="srv-icon">🎂</div>
+      </div>
+      <div class="srv-info">
+        <div class="srv-title">Birthday<br>Photography</div>
+        <p class="srv-desc">From big smiles to little candles, we capture every joyful moment.</p>
+        <a href="#" class="srv-link">VIEW DETAILS ➔</a>
+      </div>
+    </div>
+    <!-- Card 5 -->
+    <div class="srv-card">
+      <div class="srv-img-wrap">
+        <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=400&q=80" alt="Baby Photography">
+        <div class="srv-icon">👶</div>
+      </div>
+      <div class="srv-info">
+        <div class="srv-title">Baby<br>Photography</div>
+        <p class="srv-desc">Adorable and timeless images of your little bundle of joy.</p>
+        <a href="#" class="srv-link">VIEW DETAILS ➔</a>
+      </div>
+    </div>
+    <!-- Card 6 -->
+    <div class="srv-card">
+      <div class="srv-img-wrap">
+        <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=400&q=80" alt="Maternity Photography">
+        <div class="srv-icon">🤰</div>
+      </div>
+      <div class="srv-info">
+        <div class="srv-title">Maternity<br>Photography</div>
+        <p class="srv-desc">Celebrating the beauty of motherhood with artistic and elegant portraits.</p>
+        <a href="#" class="srv-link">VIEW DETAILS ➔</a>
+      </div>
+    </div>
+    <!-- Card 7 -->
+    <div class="srv-card">
+      <div class="srv-img-wrap">
+        <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=400&q=80" alt="Family Photography">
+        <div class="srv-icon">👨‍👩‍👧‍👦</div>
+      </div>
+      <div class="srv-info">
+        <div class="srv-title">Family<br>Photography</div>
+        <p class="srv-desc">Preserving the love and bond of your family forever.</p>
+        <a href="#" class="srv-link">VIEW DETAILS ➔</a>
+      </div>
+    </div>
+    <!-- Card 8 -->
+    <div class="srv-card">
+      <div class="srv-img-wrap">
+        <img src="https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?w=400&q=80" alt="Corporate Events">
+        <div class="srv-icon">💼</div>
+      </div>
+      <div class="srv-info">
+        <div class="srv-title">Corporate<br>Events</div>
+        <p class="srv-desc">Professional coverage of events, conferences and corporate gatherings.</p>
+        <a href="#" class="srv-link">VIEW DETAILS ➔</a>
+      </div>
+    </div>
+    <!-- Card 9 -->
+    <div class="srv-card">
+      <div class="srv-img-wrap">
+        <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=400&q=80" alt="Drone Photography">
+        <div class="srv-icon">🚁</div>
+      </div>
+      <div class="srv-info">
+        <div class="srv-title">Drone<br>Photography</div>
+        <p class="srv-desc">Stunning aerial shots that add a unique perspective.</p>
+        <a href="#" class="srv-link">VIEW DETAILS ➔</a>
+      </div>
+    </div>
+    <!-- Card 10 -->
+    <div class="srv-card">
+      <div class="srv-img-wrap">
+        <img src="https://images.unsplash.com/photo-1579168711413-eb1e27a69622?w=400&q=80" alt="Cinematic Films">
+        <div class="srv-icon">🎥</div>
+      </div>
+      <div class="srv-info">
+        <div class="srv-title">Cinematic<br>Films</div>
+        <p class="srv-desc">Beautifully crafted films that tell your story in a cinematic style.</p>
+        <a href="#" class="srv-link">VIEW DETAILS ➔</a>
+      </div>
+    </div>
+    <!-- Card 11 -->
+    <div class="srv-card">
+      <div class="srv-img-wrap">
+        <img src="https://images.unsplash.com/photo-1587440871875-191322ee64b0?w=400&q=80" alt="Album Design">
+        <div class="srv-icon">📖</div>
+      </div>
+      <div class="srv-info">
+        <div class="srv-title">Album<br>Design</div>
+        <p class="srv-desc">Premium handcrafted albums designed to cherish forever.</p>
+        <a href="#" class="srv-link">VIEW DETAILS ➔</a>
+      </div>
+    </div>
+    <!-- Card 12 -->
+    <div class="srv-card">
+      <div class="srv-img-wrap">
+        <img src="https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?w=400&q=80" alt="Photo Editing">
+        <div class="srv-icon">🎛️</div>
+      </div>
+      <div class="srv-info">
+        <div class="srv-title">Photo Editing &<br>Retouching</div>
+        <p class="srv-desc">Professional editing services for perfect results.</p>
+        <a href="#" class="srv-link">VIEW DETAILS ➔</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS BAR -->
+<div class="benefits-bar">
+  <div class="bnft-item">
+    <div class="bnft-icon">🤵</div>
+    <div class="bnft-text">
+      <span class="bnft-title">Professional Team</span>
+      <span class="bnft-sub">Experienced & dedicated</span>
+    </div>
+  </div>
+  <div class="bnft-item">
+    <div class="bnft-icon">📷</div>
+    <div class="bnft-text">
+      <span class="bnft-title">Premium Equipment</span>
+      <span class="bnft-sub">Latest cameras & gear</span>
+    </div>
+  </div>
+  <div class="bnft-item">
+    <div class="bnft-icon">⭐</div>
+    <div class="bnft-text">
+      <span class="bnft-title">High Quality Output</span>
+      <span class="bnft-sub">Best quality guaranteed</span>
+    </div>
+  </div>
+  <div class="bnft-item">
+    <div class="bnft-icon">⏱️</div>
+    <div class="bnft-text">
+      <span class="bnft-title">Timely Delivery</span>
+      <span class="bnft-sub">On time, every time</span>
+    </div>
+  </div>
+  <div class="bnft-item">
+    <div class="bnft-icon">💰</div>
+    <div class="bnft-text">
+      <span class="bnft-title">Affordable Packages</span>
+      <span class="bnft-sub">Best value for your money</span>
+    </div>
+  </div>
+</div>
+
+<!-- OUR PROCESS -->
+<section class="process-sec">
+  <div class="sec-head">
+    <span class="eyebrow">OUR PROCESS</span>
+    <h2>From Click to Cherished Memories</h2>
+    <span class="sec-divider"><span>❦</span></span>
+  </div>
+  
+  <div class="timeline">
+    <div class="tm-step">
+      <span class="tm-num">01</span>
+      <div class="tm-circle">💬</div>
+      <div class="tm-title">Consultation</div>
+      <p class="tm-desc">We understand your needs and expectations.</p>
+    </div>
+    <div class="tm-step">
+      <span class="tm-num">02</span>
+      <div class="tm-circle">📅</div>
+      <div class="tm-title">Planning</div>
+      <p class="tm-desc">Creative planning and perfect preparation.</p>
+    </div>
+    <div class="tm-step">
+      <span class="tm-num">03</span>
+      <div class="tm-circle">📷</div>
+      <div class="tm-title">Photoshoot</div>
+      <p class="tm-desc">Capturing genuine moments with passion and creativity.</p>
+    </div>
+    <div class="tm-step">
+      <span class="tm-num">04</span>
+      <div class="tm-circle">🎛️</div>
+      <div class="tm-title">Editing</div>
+      <p class="tm-desc">Professional editing and retouching to perfection.</p>
+    </div>
+    <div class="tm-step">
+      <span class="tm-num">05</span>
+      <div class="tm-circle">🎁</div>
+      <div class="tm-title">Delivery</div>
+      <p class="tm-desc">Delivering your memories in the best quality.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="cta-text">
+    <h2>Ready to Capture Your Special Moments?</h2>
+    <p>Let's create something beautiful together.</p>
+  </div>
+  <div class="cta-btns">
+    <button class="btn-gold-solid">BOOK YOUR SESSION 📅</button>
+    <button class="btn-outline-white">CONTACT US ➔</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">
+        <div class="logo-text">
+          <span class="logo-script" style="color:#fff">Moments 📷</span>
+          <span class="logo-sub" style="color:#888">Photography</span>
+        </div>
+      </div>
+      <p>Capturing real emotions and timeless memories that you will cherish forever.</p>
+      <div class="footer-social">
+        <a href="#">f</a>
+        <a href="#">📷</a>
+        <a href="#">▶</a>
+        <a href="#">𝑃</a>
+      </div>
+    </div>
+    <div>
+      <h4>QUICK LINKS</h4>
+      <ul>
+        <li><a href="moments-photography.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>SERVICES</h4>
+      <ul>
+        <li><a href="#">Wedding Photography</a></li>
+        <li><a href="#">Pre Wedding Shoots</a></li>
+        <li><a href="#">Birthday Photography</a></li>
+        <li><a href="#">Maternity Shoots</a></li>
+        <li><a href="#">Cinematic Films</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>CONTACT INFO</h4>
+      <div class="contact-item">
+        <span class="icon">📞</span>
+        <span class="txt">+91 98765 43210</span>
+      </div>
+      <div class="contact-item">
+        <span class="icon">✉️</span>
+        <span class="txt">hello@moments.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="icon">📍</span>
+        <span class="txt">123, Photography Street,<br>Your City, India – 500001</span>
+      </div>
+    </div>
+    <div>
+      <h4>FOLLOW US</h4>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px">
+        <img src="https://images.unsplash.com/photo-1519741347686-c1e331c20fef?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1476234251651-f353703a034d?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Moments Photography. All Rights Reserved.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<div class="wa-float">💬</div>
+
+<script>
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  if (window.scrollY > 50) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+</script>
+
+</body>
+</html>

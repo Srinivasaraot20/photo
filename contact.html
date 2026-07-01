@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contact | Moments Photography</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* Base Styles */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#c9a84c;
+  --gold-light:#d4aa60;
+  --gold-dark:#a8883a;
+  --black:#0a0a0a;
+  --dark:#111111;
+  --dark2:#1a1a1a;
+  --cream:#faf7f2;
+  --cream2:#f9f6f0;
+  --text:#333;
+  --grey:#888;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+input, select, textarea, button {font-family:inherit;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 50px;
+  background:transparent;
+  transition:0.3s;
+}
+nav.scrolled {
+  background: var(--dark);
+  padding: 12px 50px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-text{display:flex;flex-direction:column;line-height:1}
+.logo-script{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:28px;color:#fff;line-height:1.1}
+.logo-sub{font-size:9px;color:#ccc;letter-spacing:4px;text-transform:uppercase;margin-top:2px}
+.logo-cam{color:var(--gold);font-size:20px;margin-top:4px}
+.nav-links{display:flex;gap:32px}
+.nav-links a{font-size:13px;font-weight:500;color:#fff;letter-spacing:1.5px;text-transform:uppercase;opacity:.85;transition:.2s}
+.nav-links a:hover,.nav-links a.active{opacity:1;color:var(--gold)}
+.nav-links a.active{border-bottom:1px solid var(--gold);padding-bottom:2px}
+.btn-book{
+  background:var(--gold-light);color:#fff;
+  padding:11px 22px;border-radius:3px;
+  font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  border:none;cursor:pointer;display:flex;align-items:center;gap:6px;
+  transition:.2s;
+}
+.btn-book:hover{background:var(--gold)}
+
+/* CONTACT HERO */
+.cnt-hero{
+  position:relative;height:75vh;min-height:600px;
+  display:flex;align-items:center;
+  background:linear-gradient(to right,rgba(10,10,10,0.95) 30%,rgba(10,10,10,0.4) 100%),
+  url('https://images.unsplash.com/photo-1516280030429-27679b3dc9ce?w=1600&q=80') center right/cover no-repeat;
+  overflow:hidden;
+}
+.cnt-hero-content{padding-left:80px;position:relative;z-index:2;color:#fff;max-width:600px}
+.cnt-hero-eyebrow{font-size:11px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;display:block;font-weight:600}
+.cnt-hero-content h1{font-family:'Playfair Display',serif;font-size:56px;font-weight:700;line-height:1.1;margin-bottom:10px}
+.cnt-hero-content h1 .gold{color:var(--gold-light)}
+.cnt-script{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:56px;font-weight:400;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.cnt-script svg{width:80px;height:40px;stroke:var(--gold-light);fill:none;stroke-width:1.5px}
+.cnt-hero-content p{color:#ccc;font-size:14px;line-height:1.8;margin-bottom:30px;max-width:400px}
+.hero-contacts{display:flex;gap:40px}
+.hc-item{display:flex;align-items:center;gap:12px}
+.hc-icon{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:18px}
+.hc-text{display:flex;flex-direction:column}
+.hc-label{font-size:10px;color:#aaa;font-weight:600;margin-bottom:2px}
+.hc-val{font-size:13px;color:#fff;font-weight:600;letter-spacing:1px}
+
+/* FORM / INFO SPLIT */
+.split-sec{display:flex;min-height:600px}
+.split-left{flex:1.2;background:#fff;padding:80px 80px 80px 100px}
+.split-right{flex:1;background:var(--cream2);padding:80px 100px 80px 80px}
+.sec-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--black);margin-bottom:40px}
+
+/* FORM */
+.contact-form{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.form-group{position:relative}
+.form-group.full{grid-column:span 2}
+.form-icon{position:absolute;left:15px;top:14px;color:#999;font-size:14px}
+.form-control{width:100%;background:#f9f9f9;border:1px solid #eee;border-radius:2px;padding:14px 14px 14px 45px;font-size:12px;color:var(--text);outline:none;transition:.2s}
+.form-control:focus{border-color:var(--gold-light);background:#fff}
+textarea.form-control{height:120px;resize:none;padding-top:16px}
+select.form-control{appearance:none;cursor:pointer}
+.select-arr{position:absolute;right:15px;top:15px;color:#999;font-size:12px;pointer-events:none}
+.btn-submit{grid-column:span 2;background:var(--black);color:var(--gold-light);border:none;padding:16px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;cursor:pointer;border-radius:2px;display:flex;align-items:center;justify-content:center;gap:10px;transition:.2s}
+.btn-submit:hover{background:var(--dark);color:var(--gold)}
+
+/* INFO */
+.info-list{display:flex;flex-direction:column;gap:35px}
+.info-item{display:flex;align-items:flex-start;gap:20px}
+.ii-icon{width:46px;height:46px;border-radius:50%;background:var(--dark);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:18px;flex-shrink:0}
+.ii-text{display:flex;flex-direction:column}
+.ii-title{font-size:13px;font-weight:700;color:var(--black);margin-bottom:6px}
+.ii-desc{font-size:12px;color:#666;line-height:1.6}
+.ii-link{font-size:11px;color:var(--gold-dark);font-weight:600;margin-top:6px;display:inline-block}
+
+/* MAP SEC */
+.map-sec{position:relative;height:450px;background:#ddd}
+.map-iframe{width:100%;height:100%;border:none}
+.map-card{position:absolute;left:100px;top:50%;transform:translateY(-50%);background:#fff;padding:40px;border-radius:2px;box-shadow:0 10px 40px rgba(0,0,0,0.1);width:320px;z-index:2}
+.map-card h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--black);margin-bottom:15px}
+.map-card p{font-size:13px;color:#666;line-height:1.6;margin-bottom:25px}
+.btn-dark{background:var(--black);color:#fff;border:none;padding:12px 24px;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;cursor:pointer;border-radius:2px;display:inline-flex;align-items:center;gap:8px;transition:.2s}
+.btn-dark:hover{background:var(--gold-dark)}
+.map-marker{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:50px;height:50px;background:var(--dark);border-radius:50% 50% 50% 0;transform:translate(-50%,-100%) rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 20px rgba(0,0,0,0.2);pointer-events:none}
+.map-marker::after{content:'📷';display:block;transform:rotate(45deg);color:var(--gold);font-size:18px}
+
+/* FAQ / CTA SPLIT */
+.faq-sec{display:flex;min-height:500px}
+.faq-left{flex:1;background:linear-gradient(rgba(15,15,15,0.85),rgba(15,15,15,0.85)),url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80') center/cover;padding:80px 100px;display:flex;flex-direction:column;justify-content:center;color:#fff}
+.faq-icon{width:50px;height:50px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:22px;margin-bottom:20px}
+.faq-left h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;margin-bottom:16px;line-height:1.2}
+.faq-left p{font-size:13px;color:#bbb;line-height:1.6;margin-bottom:30px}
+
+.faq-right{flex:1.2;background:var(--dark);padding:80px 100px 80px 80px;display:flex;flex-direction:column;justify-content:center}
+.faq-right h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#fff;margin-bottom:30px}
+details{border:1px solid rgba(255,255,255,.1);border-radius:2px;margin-bottom:15px;background:rgba(255,255,255,.02)}
+summary{padding:18px 20px;font-size:13px;font-weight:600;color:#eee;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'∨';font-size:12px;color:var(--gold);transition:.3s;font-weight:400}
+details[open] summary::after{transform:rotate(180deg)}
+details[open] summary{border-bottom:1px solid rgba(255,255,255,.05)}
+.faq-content{padding:20px;font-size:12px;color:#aaa;line-height:1.7}
+
+/* FOOTER */
+footer{background:var(--dark);padding:60px 60px 30px;border-top:1px solid rgba(255,255,255,.05)}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1.2fr 1.2fr 1.4fr;gap:40px;margin-bottom:40px}
+.footer-brand .logo-script{font-size:26px}
+.footer-brand p{font-size:12px;color:#888;line-height:1.8;margin:14px 0 16px}
+.footer-social{display:flex;gap:10px}
+.footer-social a{width:30px;height:30px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#999;transition:.2s}
+.footer-social a:hover{border-color:var(--gold);color:var(--gold)}
+footer h4{font-size:13px;font-weight:700;color:#fff;letter-spacing:1px;text-transform:uppercase;margin-bottom:18px}
+footer ul{list-style:none}
+footer ul li{margin-bottom:10px}
+footer ul li a{font-size:12px;color:#888;transition:.2s}
+footer ul li a:hover{color:var(--gold)}
+.contact-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+.contact-item span.icon{color:var(--gold);flex-shrink:0;margin-top:1px}
+.contact-item span.txt{font-size:12px;color:#888;line-height:1.5}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:20px;display:flex;justify-content:space-between;align-items:center}
+.footer-bottom p{font-size:11px;color:#666}
+.footer-bottom-links{display:flex;gap:20px}
+.footer-bottom-links a{font-size:11px;color:#666;transition:.2s}
+.footer-bottom-links a:hover{color:var(--gold)}
+.wa-float{position:fixed;right:20px;bottom:24px;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;color:#fff;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;cursor:pointer;transition:.2s}
+.wa-float:hover{transform:scale(1.1)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-text">
+      <span class="logo-script">Moments <span class="logo-cam">📷</span></span>
+      <span class="logo-sub">Photography</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="moments-photography.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html" class="active">Contact</a>
+  </div>
+  <a href="book.html" class="btn-book">BOOK A SESSION 📅</a>
+</nav>
+
+<!-- CONTACT HERO -->
+<section class="cnt-hero">
+  <div class="cnt-hero-content">
+    <span class="cnt-hero-eyebrow">GET IN TOUCH</span>
+    <h1>Let's Capture<br><span class="gold">Your Beautiful</span></h1>
+    <div class="cnt-script">Moments 
+      <svg viewBox="0 0 100 40">
+        <path d="M10,20 Q20,0 40,20 T70,20 C80,20 90,10 95,5" />
+        <path d="M40,20 C45,30 35,40 30,30 C25,20 35,10 40,20" />
+      </svg>
+    </div>
+    <p>We would love to hear about your special occasion and discuss how we can make it unforgettable.</p>
+    <div class="hero-contacts">
+      <div class="hc-item">
+        <div class="hc-icon">💬</div>
+        <div class="hc-text">
+          <span class="hc-label">Chat on WhatsApp</span>
+          <span class="hc-val">+91 98765 43210</span>
+        </div>
+      </div>
+      <div class="hc-item">
+        <div class="hc-icon">📞</div>
+        <div class="hc-text">
+          <span class="hc-label">Call Us</span>
+          <span class="hc-val">+91 98765 43210</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT FORM / INFO -->
+<section class="split-sec">
+  <div class="split-left">
+    <h2 class="sec-title">Get In Touch</h2>
+    <form class="contact-form">
+      <div class="form-group">
+        <span class="form-icon">👤</span>
+        <input type="text" class="form-control" placeholder="Your Name">
+      </div>
+      <div class="form-group">
+        <span class="form-icon">📞</span>
+        <input type="tel" class="form-control" placeholder="Phone Number">
+      </div>
+      <div class="form-group">
+        <span class="form-icon">✉️</span>
+        <input type="email" class="form-control" placeholder="Your Email">
+      </div>
+      <div class="form-group">
+        <span class="form-icon">📅</span>
+        <select class="form-control">
+          <option value="" disabled selected>Event Type</option>
+          <option>Wedding</option>
+          <option>Pre-Wedding</option>
+          <option>Birthday</option>
+          <option>Corporate</option>
+        </select>
+        <span class="select-arr">∨</span>
+      </div>
+      <div class="form-group">
+        <span class="form-icon">📆</span>
+        <input type="text" class="form-control" placeholder="Event Date">
+      </div>
+      <div class="form-group">
+        <span class="form-icon">📍</span>
+        <input type="text" class="form-control" placeholder="Venue / Location">
+      </div>
+      <div class="form-group full">
+        <span class="form-icon" style="top:16px">✏️</span>
+        <textarea class="form-control" placeholder="Tell us about your event"></textarea>
+      </div>
+      <button type="button" class="btn-submit">SEND MESSAGE ➔</button>
+    </form>
+  </div>
+  <div class="split-right">
+    <h2 class="sec-title">We'd Love To Hear From You!</h2>
+    <div class="info-list">
+      <div class="info-item">
+        <div class="ii-icon">📍</div>
+        <div class="ii-text">
+          <span class="ii-title">Our Studio</span>
+          <span class="ii-desc">123, Photography Street,<br>Your City, India – 500001</span>
+          <a href="#" class="ii-link">View on Google Maps ➔</a>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="ii-icon">📞</div>
+        <div class="ii-text">
+          <span class="ii-title">Call / WhatsApp</span>
+          <span class="ii-desc">+91 98765 43210<br>+91 91234 56789</span>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="ii-icon">✉️</div>
+        <div class="ii-text">
+          <span class="ii-title">Email Us</span>
+          <span class="ii-desc">hello@moments.com<br>info@moments.com</span>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="ii-icon">⏱️</div>
+        <div class="ii-text">
+          <span class="ii-title">Business Hours</span>
+          <span class="ii-desc">Mon - Sat : 9:00 AM - 8:00 PM<br>Sunday   : 10:00 AM - 5:00 PM</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP SEC -->
+<section class="map-sec">
+  <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1m3!1d3806.326296180556!2d78.39958031537233!3d17.44409398804473!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9158f201b205%3A0x11bbe7be7792411b!2sMadhapur%2C%20Hyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1680123456789!5m2!1sen!2sin" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <div class="map-marker"></div>
+  <div class="map-card">
+    <h3>Find Us Here</h3>
+    <p>123, Photography Street,<br>Your City, India – 500001</p>
+    <button class="btn-dark">DIRECTIONS ➔</button>
+  </div>
+</section>
+
+<!-- FAQ / CTA -->
+<section class="faq-sec">
+  <div class="faq-left">
+    <div class="faq-icon">📷</div>
+    <h2>Ready to create<br>beautiful memories?</h2>
+    <p>Let's make your special moments<br>timeless and unforgettable.</p>
+    <div>
+      <button class="btn-book" style="display:inline-flex">BOOK A SESSION 📅</button>
+    </div>
+  </div>
+  <div class="faq-right">
+    <h2>Frequently Asked Questions</h2>
+    <details open>
+      <summary>How do I book a photoshoot?</summary>
+      <div class="faq-content">
+        You can book a session by filling out the contact form, calling us, or sending us a WhatsApp message. We'll get back to you within 24 hours.
+      </div>
+    </details>
+    <details>
+      <summary>Do you travel for destination weddings?</summary>
+      <div class="faq-content">
+        Yes, we do! We love traveling to capture beautiful destination weddings. Travel and accommodation charges apply separately based on the location.
+      </div>
+    </details>
+    <details>
+      <summary>How will we receive our photos?</summary>
+      <div class="faq-content">
+        You will receive a secure online gallery link to view and download all your high-resolution edited photos. We also provide physical albums if included in your package.
+      </div>
+    </details>
+    <details>
+      <summary>How long does it take to deliver the photos?</summary>
+      <div class="faq-content">
+        For standard photoshoots, it takes about 1-2 weeks. For wedding albums and cinematic videos, it usually takes 4-6 weeks to ensure the highest quality editing and perfection.
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">
+        <div class="logo-text">
+          <span class="logo-script" style="color:#fff">Moments 📷</span>
+          <span class="logo-sub" style="color:#888">Photography</span>
+        </div>
+      </div>
+      <p>Capturing real emotions and timeless memories that you will cherish forever.</p>
+      <div class="footer-social">
+        <a href="#">f</a>
+        <a href="#">📷</a>
+        <a href="#">▶</a>
+        <a href="#">𝑃</a>
+      </div>
+    </div>
+    <div>
+      <h4>QUICK LINKS</h4>
+      <ul>
+        <li><a href="moments-photography.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>SERVICES</h4>
+      <ul>
+        <li><a href="#">Wedding Photography</a></li>
+        <li><a href="#">Pre Wedding Shoots</a></li>
+        <li><a href="#">Birthday Photography</a></li>
+        <li><a href="#">Maternity Shoots</a></li>
+        <li><a href="#">Cinematic Films</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>CONTACT INFO</h4>
+      <div class="contact-item">
+        <span class="icon">📞</span>
+        <span class="txt">+91 98765 43210</span>
+      </div>
+      <div class="contact-item">
+        <span class="icon">✉️</span>
+        <span class="txt">hello@moments.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="icon">📍</span>
+        <span class="txt">123, Photography Street,<br>Your City, India – 500001</span>
+      </div>
+    </div>
+    <div>
+      <h4>FOLLOW US</h4>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px">
+        <img src="https://images.unsplash.com/photo-1519741347686-c1e331c20fef?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1476234251651-f353703a034d?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Moments Photography. All Rights Reserved.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<div class="wa-float">💬</div>
+
+<script>
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  if (window.scrollY > 50) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+</script>
+
+</body>
+</html>

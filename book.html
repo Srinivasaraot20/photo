@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Book a Session | Moments Photography</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* Base Styles */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#c9a84c;
+  --gold-light:#d4aa60;
+  --gold-dark:#a8883a;
+  --black:#0a0a0a;
+  --dark:#111111;
+  --dark2:#1a1a1a;
+  --cream:#faf7f2;
+  --cream2:#f9f6f0;
+  --text:#333;
+  --grey:#888;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+input, select, textarea, button {font-family:inherit;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 50px;
+  background:transparent;
+  transition:0.3s;
+}
+nav.scrolled {
+  background: var(--dark);
+  padding: 12px 50px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-text{display:flex;flex-direction:column;line-height:1}
+.logo-script{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:28px;color:#fff;line-height:1.1}
+.logo-sub{font-size:9px;color:#ccc;letter-spacing:4px;text-transform:uppercase;margin-top:2px}
+.logo-cam{color:var(--gold);font-size:20px;margin-top:4px}
+.nav-links{display:flex;gap:32px}
+.nav-links a{font-size:13px;font-weight:500;color:#fff;letter-spacing:1.5px;text-transform:uppercase;opacity:.85;transition:.2s}
+.nav-links a:hover,.nav-links a.active{opacity:1;color:var(--gold)}
+.nav-links a.active{border-bottom:1px solid var(--gold);padding-bottom:2px}
+.btn-book{
+  background:var(--gold-light);color:#fff;
+  padding:11px 22px;border-radius:3px;
+  font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  border:none;cursor:pointer;display:flex;align-items:center;gap:6px;
+  transition:.2s;text-decoration:none;
+}
+.btn-book:hover{background:var(--gold)}
+
+/* BOOK HERO */
+.bk-hero{
+  position:relative;height:75vh;min-height:550px;
+  display:flex;flex-direction:column;justify-content:center;
+  background:linear-gradient(to right,rgba(10,10,10,0.95) 40%,rgba(10,10,10,0.1) 100%),
+  url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80') center right/cover no-repeat;
+  padding:0 80px;
+}
+.bk-hero-content{position:relative;z-index:2;color:#fff;max-width:600px;margin-top:60px}
+.bk-hero-eyebrow{font-size:11px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;display:block;font-weight:600}
+.bk-hero-content h1{font-family:'Playfair Display',serif;font-size:56px;font-weight:700;line-height:1.1;margin-bottom:20px}
+.bk-hero-content h1 .gold{color:var(--gold-light)}
+.bk-hero-content p{color:#ccc;font-size:14px;line-height:1.8;margin-bottom:40px;max-width:400px}
+.hero-features{display:flex;gap:30px;align-items:center;margin-top:20px}
+.hf-item{display:flex;align-items:center;gap:12px}
+.hf-icon{width:46px;height:46px;border-radius:50%;border:1px solid rgba(201,168,76,0.5);display:flex;align-items:center;justify-content:center;color:var(--gold-light);font-size:20px}
+.hf-text{display:flex;flex-direction:column}
+.hf-title{font-size:11px;color:#fff;font-weight:600;margin-bottom:2px}
+.hf-desc{font-size:10px;color:#aaa}
+
+/* SPLIT SEC */
+.split-sec{display:flex;min-height:800px}
+.split-left{flex:1.4;background:#fff;padding:80px 60px 80px 80px}
+.split-right{flex:1;background:var(--cream2);padding:80px 80px 80px 60px}
+.sec-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--black);margin-bottom:40px}
+
+/* FORM */
+.bk-form{display:grid;grid-template-columns:1fr 1fr;gap:20px 25px}
+.form-group{position:relative;display:flex;flex-direction:column;gap:8px}
+.form-group.full{grid-column:span 2}
+.form-label{font-size:12px;font-weight:700;color:var(--black)}
+.req{color:#d9534f}
+.input-wrap{position:relative}
+.form-icon{position:absolute;left:15px;top:15px;color:#999;font-size:14px}
+.form-control{width:100%;background:#fff;border:1px solid #ddd;border-radius:3px;padding:15px 15px 15px 45px;font-size:13px;color:var(--text);outline:none;transition:.2s}
+.form-control:focus{border-color:var(--gold-light);box-shadow:0 0 0 3px rgba(201,168,76,.1)}
+textarea.form-control{height:100px;resize:none;padding-top:16px}
+select.form-control{appearance:none;cursor:pointer}
+.select-arr{position:absolute;right:15px;top:17px;color:#999;font-size:12px;pointer-events:none}
+
+/* DRAG DROP */
+.drag-drop{border:1px dashed #ccc;background:#fafafa;padding:30px;border-radius:4px;text-align:center;cursor:pointer;transition:.2s}
+.drag-drop:hover{border-color:var(--gold-light);background:#fff9f0}
+.dd-icon{font-size:28px;color:#aaa;margin-bottom:10px}
+.dd-text{font-size:13px;color:var(--text);font-weight:600;margin-bottom:4px}
+.dd-sub{font-size:10px;color:#888}
+
+/* CHECKBOX & SUBMIT */
+.terms-wrap{display:flex;align-items:center;gap:10px;margin-top:10px}
+.terms-wrap input{width:16px;height:16px;accent-color:var(--gold-dark)}
+.terms-wrap label{font-size:11px;color:#666}
+.terms-wrap a{color:var(--gold-dark);font-weight:600}
+.btn-submit{grid-column:span 2;background:var(--black);color:var(--gold-light);border:none;padding:18px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;cursor:pointer;border-radius:3px;display:flex;align-items:center;justify-content:center;gap:10px;transition:.2s;margin-top:10px}
+.btn-submit:hover{background:var(--dark);color:var(--gold)}
+
+/* INFO PANEL */
+.info-list{display:flex;flex-direction:column;gap:35px}
+.info-item{display:flex;align-items:flex-start;gap:20px}
+.ii-icon{width:46px;height:46px;border-radius:50%;background:var(--dark);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:18px;flex-shrink:0}
+.ii-text{display:flex;flex-direction:column;justify-content:center;padding-top:4px}
+.ii-title{font-size:12px;font-weight:700;color:var(--black);margin-bottom:4px}
+.ii-desc{font-size:11px;color:#666;line-height:1.5}
+
+.help-card{background:linear-gradient(rgba(15,15,15,0.9),rgba(15,15,15,0.9)),url('https://images.unsplash.com/photo-1516280030429-27679b3dc9ce?w=600&q=80') center/cover;padding:40px;border-radius:8px;margin-top:50px;color:#fff}
+.help-card h3{font-family:'Playfair Display',serif;font-size:24px;color:var(--gold-light);font-style:italic;margin-bottom:5px}
+.help-card h4{font-size:16px;font-weight:600;margin-bottom:25px}
+.hc-item{margin-bottom:15px}
+.hc-label{font-size:10px;color:#aaa;margin-bottom:4px;display:block}
+.hc-val{font-size:14px;color:var(--gold-light);font-weight:600}
+
+/* WHY BOOK BAR */
+.why-bar{background:var(--dark2);padding:40px 60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05)}
+.wb-title{flex:0.8}
+.wb-title h2{font-family:'Playfair Display',serif;font-size:32px;color:#fff;line-height:1.1;margin-bottom:8px}
+.wb-title .divi{width:40px;height:1px;background:var(--gold);display:inline-block;position:relative}
+.wb-title .divi::after{content:'';position:absolute;right:-6px;top:-2.5px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.wb-grid{flex:3;display:flex;justify-content:space-between;gap:20px}
+.wb-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
+.wb-icon{color:var(--gold-light);font-size:26px}
+.wb-item h4{font-size:12px;color:#fff;font-weight:700}
+.wb-item p{font-size:10px;color:#999;line-height:1.5;max-width:120px}
+
+/* FAQ */
+.faq-wrap{padding:80px;background:var(--cream)}
+.faq-wrap h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--black);margin-bottom:40px}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+details{border:1px solid rgba(0,0,0,.08);border-radius:3px;background:#fff}
+summary{padding:20px 24px;font-size:12px;font-weight:600;color:var(--text);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'∨';font-size:12px;color:var(--grey);transition:.3s;font-weight:400}
+details[open] summary::after{transform:rotate(180deg)}
+details[open] summary{border-bottom:1px solid rgba(0,0,0,.05)}
+.faq-content{padding:20px 24px;font-size:12px;color:#666;line-height:1.7}
+
+/* FOOTER */
+footer{background:var(--dark);padding:60px 60px 30px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1.2fr 1.2fr 1.4fr;gap:40px;margin-bottom:40px}
+.footer-brand .logo-script{font-size:26px}
+.footer-brand p{font-size:12px;color:#888;line-height:1.8;margin:14px 0 16px}
+.footer-social{display:flex;gap:10px}
+.footer-social a{width:30px;height:30px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#999;transition:.2s}
+.footer-social a:hover{border-color:var(--gold);color:var(--gold)}
+footer h4{font-size:13px;font-weight:700;color:#fff;letter-spacing:1px;text-transform:uppercase;margin-bottom:18px}
+footer ul{list-style:none}
+footer ul li{margin-bottom:10px}
+footer ul li a{font-size:12px;color:#888;transition:.2s}
+footer ul li a:hover{color:var(--gold)}
+.contact-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+.contact-item span.icon{color:var(--gold);flex-shrink:0;margin-top:1px}
+.contact-item span.txt{font-size:12px;color:#888;line-height:1.5}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:20px;display:flex;justify-content:space-between;align-items:center}
+.footer-bottom p{font-size:11px;color:#666}
+.footer-bottom-links{display:flex;gap:20px}
+.footer-bottom-links a{font-size:11px;color:#666;transition:.2s}
+.footer-bottom-links a:hover{color:var(--gold)}
+.wa-float{position:fixed;right:20px;bottom:24px;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;color:#fff;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;cursor:pointer;transition:.2s}
+.wa-float:hover{transform:scale(1.1)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-text">
+      <span class="logo-script">Moments <span class="logo-cam">📷</span></span>
+      <span class="logo-sub">Photography</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="moments-photography.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <a href="book.html" class="btn-book">BOOK A SESSION 📅</a>
+</nav>
+
+<!-- BOOK HERO -->
+<section class="bk-hero">
+  <div class="bk-hero-content">
+    <span class="bk-hero-eyebrow">BOOK A SESSION</span>
+    <h1>Let's Capture<br>Your <span class="gold">Special Moments</span></h1>
+    <p>Fill out the form below and we'll get back to you within 24 hours to plan something amazing together.</p>
+    
+    <div class="hero-features">
+      <div class="hf-item">
+        <div class="hf-icon">📅</div>
+        <div class="hf-text">
+          <span class="hf-title">Easy Booking</span>
+          <span class="hf-desc">Simple & Fast</span>
+        </div>
+      </div>
+      <div class="hf-item">
+        <div class="hf-icon">⏱️</div>
+        <div class="hf-text">
+          <span class="hf-title">Quick Response</span>
+          <span class="hf-desc">Within 24 Hours</span>
+        </div>
+      </div>
+      <div class="hf-item">
+        <div class="hf-icon">🛡️</div>
+        <div class="hf-text">
+          <span class="hf-title">Secure & Safe</span>
+          <span class="hf-desc">Your Data is Protected</span>
+        </div>
+      </div>
+      <div class="hf-item">
+        <div class="hf-icon">♡</div>
+        <div class="hf-text">
+          <span class="hf-title">Customized For You</span>
+          <span class="hf-desc">Tailored To Your Needs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT FORM / INFO -->
+<section class="split-sec">
+  <div class="split-left">
+    <h2 class="sec-title">Tell Us About Your Session</h2>
+    <form class="bk-form">
+      <div class="form-group">
+        <label class="form-label">Full Name <span class="req">*</span></label>
+        <div class="input-wrap">
+          <span class="form-icon">👤</span>
+          <input type="text" class="form-control" placeholder="Enter your full name" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone Number <span class="req">*</span></label>
+        <div class="input-wrap">
+          <span class="form-icon">📞</span>
+          <input type="tel" class="form-control" placeholder="Enter your phone number" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address <span class="req">*</span></label>
+        <div class="input-wrap">
+          <span class="form-icon">✉️</span>
+          <input type="email" class="form-control" placeholder="Enter your email address" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Event Type <span class="req">*</span></label>
+        <div class="input-wrap">
+          <span class="form-icon">📅</span>
+          <select class="form-control" required>
+            <option value="" disabled selected>Select event type</option>
+            <option>Wedding</option>
+            <option>Pre-Wedding</option>
+            <option>Birthday</option>
+            <option>Maternity</option>
+            <option>Corporate</option>
+          </select>
+          <span class="select-arr">∨</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Event Date <span class="req">*</span></label>
+        <div class="input-wrap">
+          <span class="form-icon">📆</span>
+          <input type="text" class="form-control" placeholder="Select event date" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Venue / Location <span class="req">*</span></label>
+        <div class="input-wrap">
+          <span class="form-icon">📍</span>
+          <input type="text" class="form-control" placeholder="Enter venue or location" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Budget Range <span class="req">*</span></label>
+        <div class="input-wrap">
+          <span class="form-icon">💰</span>
+          <select class="form-control" required>
+            <option value="" disabled selected>Select your budget range</option>
+            <option>Below $1,000</option>
+            <option>$1,000 - $3,000</option>
+            <option>$3,000 - $5,000</option>
+            <option>Above $5,000</option>
+          </select>
+          <span class="select-arr">∨</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">No. of Guests (Approx.)</label>
+        <div class="input-wrap">
+          <span class="form-icon">👥</span>
+          <input type="text" class="form-control" placeholder="Enter expected number">
+        </div>
+      </div>
+      <div class="form-group full">
+        <label class="form-label">Tell Us About Your Requirements <span class="req">*</span></label>
+        <div class="input-wrap">
+          <span class="form-icon" style="top:16px">✏️</span>
+          <textarea class="form-control" placeholder="Share more details about your event, style preferences, special requests..." required></textarea>
+        </div>
+      </div>
+      <div class="form-group full">
+        <label class="form-label">Upload Inspiration (Optional)</label>
+        <p style="font-size:10px;color:#888;margin-bottom:6px">Upload images or moodboard to help us understand your vision.</p>
+        <div class="drag-drop">
+          <div class="dd-icon">☁️</div>
+          <div class="dd-text">Drag & drop files here or click to browse</div>
+          <div class="dd-sub">JPG, PNG or PDF (Max. 10MB each)</div>
+        </div>
+      </div>
+      <div class="form-group full terms-wrap">
+        <input type="checkbox" id="terms" required>
+        <label for="terms">I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms & Conditions</a></label>
+      </div>
+      <button type="button" class="btn-submit">SUBMIT BOOKING REQUEST ➔</button>
+    </form>
+  </div>
+  <div class="split-right">
+    <h2 class="sec-title" style="margin-bottom:30px">Booking Information</h2>
+    <div class="info-list">
+      <div class="info-item">
+        <div class="ii-icon">⏱️</div>
+        <div class="ii-text">
+          <span class="ii-title">Response Time</span>
+          <span class="ii-desc">We'll get back to you within 24 hours</span>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="ii-icon">💬</div>
+        <div class="ii-text">
+          <span class="ii-title">Consultation</span>
+          <span class="ii-desc">We'll discuss your requirements in detail</span>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="ii-icon">🎁</div>
+        <div class="ii-text">
+          <span class="ii-title">Customize Package</span>
+          <span class="ii-desc">We'll create a perfect package for you</span>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="ii-icon">✅</div>
+        <div class="ii-text">
+          <span class="ii-title">Booking Confirmation</span>
+          <span class="ii-desc">Secure your date with easy advance</span>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="ii-icon">📷</div>
+        <div class="ii-text">
+          <span class="ii-title">Enjoy Your Session</span>
+          <span class="ii-desc">Relax and enjoy, we'll capture the rest!</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="help-card">
+      <h3>Have Questions?</h3>
+      <h4>We're here to help!</h4>
+      <div class="hc-item">
+        <span class="hc-label">Call / WhatsApp</span>
+        <span class="hc-val">+91 98765 43210</span>
+      </div>
+      <div class="hc-item" style="margin-bottom:0">
+        <span class="hc-label">Email Us</span>
+        <span class="hc-val" style="color:#fff;font-weight:400;font-size:13px">hello@moments.com</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY BOOK BAR -->
+<div class="why-bar">
+  <div class="wb-title">
+    <h2>Why Book<br>With Us?</h2>
+    <span class="divi"></span>
+  </div>
+  <div class="wb-grid">
+    <div class="wb-item">
+      <div class="wb-icon">👨‍👩‍👦</div>
+      <h4>Experienced Team</h4>
+      <p>Passionate & creative photographers</p>
+    </div>
+    <div class="wb-item">
+      <div class="wb-icon">💼</div>
+      <h4>Premium Quality</h4>
+      <p>Top-notch equipment & best editing</p>
+    </div>
+    <div class="wb-item">
+      <div class="wb-icon">⏱️</div>
+      <h4>On-Time Delivery</h4>
+      <p>We value your time and memories</p>
+    </div>
+    <div class="wb-item">
+      <div class="wb-icon">💰</div>
+      <h4>Affordable Packages</h4>
+      <p>Quality services within your budget</p>
+    </div>
+    <div class="wb-item">
+      <div class="wb-icon">♡</div>
+      <h4>100% Satisfaction</h4>
+      <p>Your happiness is our top priority</p>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ 2-COL -->
+<section class="faq-wrap">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-grid">
+    <details>
+      <summary>How do I book a photoshoot?</summary>
+      <div class="faq-content">
+        You can book a session by filling out the contact form, calling us, or sending us a WhatsApp message. We'll get back to you within 24 hours.
+      </div>
+    </details>
+    <details>
+      <summary>How long does it take to deliver the photos?</summary>
+      <div class="faq-content">
+        For standard photoshoots, it takes about 1-2 weeks. For wedding albums and cinematic videos, it usually takes 4-6 weeks to ensure the highest quality editing.
+      </div>
+    </details>
+    <details>
+      <summary>Do you travel for destination weddings?</summary>
+      <div class="faq-content">
+        Yes, we do! We love traveling to capture beautiful destination weddings. Travel and accommodation charges apply separately based on the location.
+      </div>
+    </details>
+    <details>
+      <summary>Can we customize the packages?</summary>
+      <div class="faq-content">
+        Absolutely. All our packages can be tailor-made to suit your exact event requirements and budget preferences.
+      </div>
+    </details>
+    <details>
+      <summary>What is the booking process?</summary>
+      <div class="faq-content">
+        Once you fill out the form, we will schedule a consultation to understand your needs. After customizing your package, you pay a deposit to secure your date.
+      </div>
+    </details>
+    <details>
+      <summary>What is your cancellation policy?</summary>
+      <div class="faq-content">
+        Cancellations made 30 days prior to the event are eligible for a partial refund. The initial booking deposit is non-refundable.
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">
+        <div class="logo-text">
+          <span class="logo-script" style="color:#fff">Moments 📷</span>
+          <span class="logo-sub" style="color:#888">Photography</span>
+        </div>
+      </div>
+      <p>Capturing real emotions and timeless memories that you will cherish forever.</p>
+      <div class="footer-social">
+        <a href="#">f</a>
+        <a href="#">📷</a>
+        <a href="#">▶</a>
+        <a href="#">𝑃</a>
+      </div>
+    </div>
+    <div>
+      <h4>QUICK LINKS</h4>
+      <ul>
+        <li><a href="moments-photography.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>SERVICES</h4>
+      <ul>
+        <li><a href="#">Wedding Photography</a></li>
+        <li><a href="#">Pre Wedding Shoots</a></li>
+        <li><a href="#">Birthday Photography</a></li>
+        <li><a href="#">Maternity Shoots</a></li>
+        <li><a href="#">Cinematic Films</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>CONTACT INFO</h4>
+      <div class="contact-item">
+        <span class="icon">📞</span>
+        <span class="txt">+91 98765 43210</span>
+      </div>
+      <div class="contact-item">
+        <span class="icon">✉️</span>
+        <span class="txt">hello@moments.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="icon">📍</span>
+        <span class="txt">123, Photography Street,<br>Your City, India – 500001</span>
+      </div>
+    </div>
+    <div>
+      <h4>GALLERY PREVIEW</h4>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px">
+        <img src="https://images.unsplash.com/photo-1519741347686-c1e331c20fef?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1476234251651-f353703a034d?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=100&q=80" style="width:100%;height:50px;object-fit:cover">
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Moments Photography. All Rights Reserved.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<div class="wa-float">💬</div>
+
+<script>
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  if (window.scrollY > 50) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+</script>
+
+</body>
+</html>
