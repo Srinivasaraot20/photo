@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Book a Session | Moments Photography{% endblock %}
+{% block content %}
+<section style="padding:120px 60px 60px;background:#fff;min-height:100vh;">
+  <h1 style="font-family:'Playfair Display',serif;font-size:48px;margin-bottom:20px;">Book a Session</h1>
+  <p style="max-width:700px;font-size:16px;line-height:1.8;color:#555;">Share your details and we will contact you soon to plan a beautiful session.</p>
+  <form style="margin-top:32px;max-width:600px;display:grid;gap:16px;">
+    <input placeholder="Your Name" style="padding:14px 16px;border:1px solid #ddd;border-radius:6px;"/>
+    <input placeholder="Email Address" style="padding:14px 16px;border:1px solid #ddd;border-radius:6px;"/>
+    <input placeholder="Event Type" style="padding:14px 16px;border:1px solid #ddd;border-radius:6px;"/>
+    <textarea placeholder="Tell us about your vision" rows="5" style="padding:14px 16px;border:1px solid #ddd;border-radius:6px;"></textarea>
+    <button type="submit" style="background:#c9a84c;color:#fff;padding:14px 20px;border:none;border-radius:6px;cursor:pointer;">Send Inquiry</button>
+  </form>
+</section>
+{% endblock %}

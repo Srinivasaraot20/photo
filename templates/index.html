@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Moments Photography{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-tag">LUXURY PHOTOGRAPHY STUDIO</span>
+    <h1>
+      <span class="line1">Timeless Memories</span>
+      <span class="line2">Captured with</span>
+      <span class="line3">Elegance</span>
+    </h1>
+    <p>We create refined, cinematic photography for weddings, portraits, and life’s most meaningful chapters.</p>
+    <div class="hero-btns">
+      <a class="btn-gold" href="{{ url_for('book') }}">Book a Session</a>
+      <a class="btn-gold" href="{{ url_for('gallery') }}">View Gallery</a>
+    </div>
+  </div>
+  <div class="hero-social">
+    <a href="#">IG</a><a href="#">f</a><a href="#">▶</a>
+  </div>
+</section>
+{% endblock %}
