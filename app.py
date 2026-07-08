@@ -76,13 +76,18 @@ def book():
     return content, 200, {'Content-Type': 'text/html; charset=utf-8'}
 
 def update_links(content):
-    """Update internal HTML links to Flask routes"""
+    """Update internal HTML links to Flask routes and fix image paths"""
+    # Update navigation links
     content = content.replace('href="moments-photography.html"', 'href="/"')
     content = content.replace('href="about.html"', 'href="/about"')
     content = content.replace('href="services.html"', 'href="/services"')
     content = content.replace('href="gallery.html"', 'href="/gallery"')
     content = content.replace('href="contact.html"', 'href="/contact"')
     content = content.replace('href="book.html"', 'href="/book"')
+    
+    # Fix image paths - convert relative paths to absolute
+    content = content.replace('src="images/', 'src="/images/')
+    
     return content
 
 if __name__ == '__main__':
