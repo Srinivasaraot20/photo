@@ -83,7 +83,19 @@ def serve_image(filename):
         # Security check: ensure the path is within images folder
         if image_path.parent != BASE_DIR / 'images':
             return "Not found", 404
-        return send_file(str(image_path), mimetype='image/jpeg')
+        
+        # Determine MIME type based on file extension
+        ext = image_path.suffix.lower()
+        mime_types = {
+            '.jpg': 'image/jpeg',
+            '.jpeg': 'image/jpeg',
+            '.png': 'image/png',
+            '.webp': 'image/webp',
+            '.gif': 'image/gif'
+        }
+        mimetype = mime_types.get(ext, 'image/jpeg')
+        
+        return send_file(str(image_path), mimetype=mimetype)
     except FileNotFoundError:
         return "Image not found", 404
     except Exception as e:
