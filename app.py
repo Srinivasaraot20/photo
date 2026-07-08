@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, send_file
 import os
 from pathlib import Path
 
@@ -74,6 +74,20 @@ def book():
     content = read_html_file(HTML_FILES['book'])
     content = update_links(content)
     return content, 200, {'Content-Type': 'text/html; charset=utf-8'}
+
+@app.route('/images/<path:filename>')
+def serve_image(filename):
+    """Serve images from the images folder"""
+    try:
+        image_path = BASE_DIR / 'images' / filename
+        # Security check: ensure the path is within images folder
+        if image_path.parent != BASE_DIR / 'images':
+            return "Not found", 404
+        return send_file(str(image_path), mimetype='image/jpeg')
+    except FileNotFoundError:
+        return "Image not found", 404
+    except Exception as e:
+        return f"Error: {str(e)}", 500
 
 def update_links(content):
     """Update internal HTML links to Flask routes and fix image paths"""
