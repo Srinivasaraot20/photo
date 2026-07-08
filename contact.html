@@ -162,6 +162,101 @@ footer ul li a:hover{color:var(--gold)}
 .footer-bottom-links a:hover{color:var(--gold)}
 .wa-float{position:fixed;right:20px;bottom:24px;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;color:#fff;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;cursor:pointer;transition:.2s}
 .wa-float:hover{transform:scale(1.1)}
+
+/* ── MOBILE MENU (MOBILE-FIRST) ── */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  cursor: pointer;
+  z-index: 1001;
+}
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  transition: 0.3s;
+}
+
+nav > .btn-book {
+  display: none;
+}
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  max-width: 400px;
+  height: 100vh;
+  background: rgba(17, 17, 17, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  padding: 80px 40px;
+  transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+  box-shadow: -5px 0 20px rgba(0,0,0,0.5);
+}
+.mobile-menu-overlay.open {
+  right: 0;
+}
+.mobile-menu-close {
+  position: absolute;
+  top: 24px;
+  right: 30px;
+  font-size: 36px;
+  color: #fff;
+  cursor: pointer;
+  line-height: 1;
+}
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 20px;
+}
+.mobile-nav-links a {
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: 0.2s;
+  text-decoration: none;
+}
+.mobile-nav-links a:hover, .mobile-nav-links a.active {
+  color: var(--gold);
+}
+.mobile-nav-links a.btn-book {
+  margin-top: 20px;
+  text-align: center;
+  justify-content: center;
+  font-size: 14px;
+  display: flex;
+}
+body.menu-open {
+  overflow: hidden;
+}
+
+/* ── DESKTOP STYLES (MIN-WIDTH: 1024px) ── */
+@media (min-width: 1024px) {
+  .hamburger {
+    display: none;
+  }
+  .nav-links {
+    display: flex;
+  }
+  nav > .btn-book {
+    display: flex;
+  }
+  .mobile-menu-overlay {
+    display: none;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -182,7 +277,27 @@ footer ul li a:hover{color:var(--gold)}
     <a href="contact.html" class="active">Contact</a>
   </div>
   <a href="book.html" class="btn-book">BOOK A SESSION 📅</a>
+  <div class="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay">
+  <div class="mobile-menu-close">&times;</div>
+  <div class="mobile-nav-links">
+    <a href="moments-photography.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html" class="active">Contact</a>
+  
+    <a href="book.html" class="btn-book">BOOK A SESSION 📅</a>
+  </div>
+</div>
+
 
 <!-- CONTACT HERO -->
 <section class="cnt-hero">
@@ -201,14 +316,14 @@ footer ul li a:hover{color:var(--gold)}
         <div class="hc-icon">💬</div>
         <div class="hc-text">
           <span class="hc-label">Chat on WhatsApp</span>
-          <span class="hc-val">+91 98765 43210</span>
+          <span class="hc-val">+91 7095141797</span>
         </div>
       </div>
       <div class="hc-item">
         <div class="hc-icon">📞</div>
         <div class="hc-text">
           <span class="hc-label">Call Us</span>
-          <span class="hc-val">+91 98765 43210</span>
+          <span class="hc-val">+91 7095141797</span>
         </div>
       </div>
     </div>
@@ -265,7 +380,7 @@ footer ul li a:hover{color:var(--gold)}
         <div class="ii-icon">📍</div>
         <div class="ii-text">
           <span class="ii-title">Our Studio</span>
-          <span class="ii-desc">123, Photography Street,<br>Your City, India – 500001</span>
+          <span class="ii-desc">Amaravathi, India</span>
           <a href="#" class="ii-link">View on Google Maps ➔</a>
         </div>
       </div>
@@ -273,7 +388,7 @@ footer ul li a:hover{color:var(--gold)}
         <div class="ii-icon">📞</div>
         <div class="ii-text">
           <span class="ii-title">Call / WhatsApp</span>
-          <span class="ii-desc">+91 98765 43210<br>+91 91234 56789</span>
+          <span class="ii-desc">+91 7095141797<br>+91 91234 56789</span>
         </div>
       </div>
       <div class="info-item">
@@ -300,7 +415,7 @@ footer ul li a:hover{color:var(--gold)}
   <div class="map-marker"></div>
   <div class="map-card">
     <h3>Find Us Here</h3>
-    <p>123, Photography Street,<br>Your City, India – 500001</p>
+    <p>Amaravathi, India</p>
     <button class="btn-dark">DIRECTIONS ➔</button>
   </div>
 </section>
@@ -386,7 +501,7 @@ footer ul li a:hover{color:var(--gold)}
       <h4>CONTACT INFO</h4>
       <div class="contact-item">
         <span class="icon">📞</span>
-        <span class="txt">+91 98765 43210</span>
+        <span class="txt">+91 7095141797</span>
       </div>
       <div class="contact-item">
         <span class="icon">✉️</span>
@@ -394,7 +509,7 @@ footer ul li a:hover{color:var(--gold)}
       </div>
       <div class="contact-item">
         <span class="icon">📍</span>
-        <span class="txt">123, Photography Street,<br>Your City, India – 500001</span>
+        <span class="txt">Amaravathi, India</span>
       </div>
     </div>
     <div>
@@ -430,6 +545,46 @@ window.addEventListener('scroll', () => {
     nav.classList.remove('scrolled');
   }
 });
+</script>
+
+
+<!-- Mobile Menu Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.querySelector('.hamburger');
+    const overlay = document.querySelector('.mobile-menu-overlay');
+    const closeBtn = document.querySelector('.mobile-menu-close');
+    const links = document.querySelectorAll('.mobile-nav-links a');
+    
+    function openMenu() {
+      overlay.classList.add('open');
+      document.body.classList.add('menu-open');
+    }
+    
+    function closeMenu() {
+      overlay.classList.remove('open');
+      document.body.classList.remove('menu-open');
+    }
+    
+    if(hamburger) hamburger.addEventListener('click', openMenu);
+    if(closeBtn) closeBtn.addEventListener('click', closeMenu);
+    
+    links.forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+    
+    document.addEventListener('click', (e) => {
+      if (overlay.classList.contains('open') && !overlay.contains(e.target) && !hamburger.contains(e.target)) {
+        closeMenu();
+      }
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) {
+        closeMenu();
+      }
+    });
+  });
 </script>
 
 </body>
